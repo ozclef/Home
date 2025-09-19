@@ -1,5 +1,6 @@
 # Home
 new index
 home principal 
+#index.html
 
-ozclef.github.io/Home/
+ozclef.github.io/home/

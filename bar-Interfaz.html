@@ -1,0 +1,328 @@
+
+<!--<<!DOCTYPE html>
+
+<html>
+<head>
+																<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+																<title>Hello, World!</title>
+</head>
+<body>
+																<h1>
+																																Hello, World!
+																</h1>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OHANA- FAMILY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Gray, Blue & White -->
+    <!-- Application Structure Plan: La 
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+
+        .scroll-item {
+            scroll-snap-align: center;
+        }
+
+
+      /*    body {
+      background: linear-gradient(135deg, #D53BFFD1 0%, ##FFFFFF 100%);
+      height: 1280px;
+    min-height: 1200px;
+  font-family: Arial, sans-serif;
+      min-height: ;
+      margin: 10px 10px 10px 10px;
+    max-width:99vh;
+      width: 1080px;
+      padding: 5px 10px 10px 10px;
+      /*escale:0.9;*/
+    }
+
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+
+
+  <span>
+    <!-- Desktop: Layout de 3 columnas -->
+    <div class="hidden md:grid md:grid-cols-[280px_1fr_280px] h-full">
+        <aside class="w-full bg-gray-800 text-white p-6 shadow-lg">
+            <h2 class="text-xl font-bold mb-4">Menú Izquierdo</h2>
+            <p class="text-gray-400">Contenido del menú de navegación. Puedes poner aquí los enlaces, botones y cualquier otro control.</p>
+            <p>
+              GRis.html
+IMG_20250910_143004_703.jpg
+IMG_20250910_143005_824.jpg
+IMG_20250910_143007_160.jpg
+README.md
+VID_20250905_193523.mp4
+VID_20250905_193742.mp4
+audio.html
+cards-img.html
+index.html
+music-Producing.html
+music.html
+            </p>
+        </aside>
+
+        <main class="w-full h-full p-8 overflow-y-auto">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-3xl font-bold mb-4">Contenido Principal</h1>
+                <p class="text-gray-700 leading-relaxed mb-4">Este es el área central de tu aplicación. Es aquí donde el usuario verá toda la información importante, como gráficos, reportes, formularios o cualquier otro dato. El layout está diseñado para que este contenido sea el foco principal de la página, sin importar si estás en un teléfono o una computadora.</p>
+                <p class="text-gray-700 leading-relaxed">En un ordenador, los menús laterales siempre estarán visibles. La estructura se adapta con el zoom para que siempre veas la vista completa de la aplicación, sin necesidad de desplazarte, tal y como lo habías solicitado.</p>
+                <div class="mt-8 h-[1200px] bg-white rounded-lg shadow-md p-6 flex items-center justify-center">
+                    <p class="text-gray-500 text-center">Aquí va el contenido de tu aplicación.</p>
+                </div>
+            </div>
+        </main>
+</span>
+
+        <aside class="w-full bg-gray-200 p-6 shadow-lg">
+            <h2 class="text-xl font-bold mb-4">Menú Derecho</h2>
+            <p class="text-gray-600">Este es un menú lateral para información complementaria, notificaciones, o un panel de control rápido. En el diseño para móvil, este menú y el de la izquierda se pueden deslizar para verlos completos.</p>
+        </aside>
+    </div>
+
+    <!-- Mobile: Layout de 3 paneles con scroll horizontal -->
+    <div id="mobile-layout" class="md:hidden w-screen h-full flex flex-row flex-nowrap scroll-container">
+        <div id="left-aside" class="scroll-item w-[80vw] bg-gray-800 text-white p-6 flex-shrink-0">
+            <h2 class="text-xl font-bold mb-4">Menú Izquierdo</h2>
+            <p class="text-gray-400">Contenido del menú de navegación. Desliza para regresar al centro.</p>
+        </div>
+
+        <main id="main-content" class="scroll-item w-screen p-8 overflow-y-auto flex-shrink-0">
+            <h1 class="text-3xl font-bold mb-4">Contenido Principal</h1>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <!--Este es el área central de tu aplicación. En el móvil, ocupa la pantalla completa. Para ver los menús laterales, simplemente desliza la pantalla hacia la izquierda o la derecha
+              -->
+              </p>
+            <p class="text-gray-700 leading-relaxed">
+            <!--  
+              Los paneles laterales estarán ligeramente "aplastados" en los bordes, indicando que hay más contenido que puedes explorar con un simple gesto. En los móviles, esta es la forma más intuitiva de navegar por menús ocultos.
+              -->
+              </p>
+              
+             <div class="mt-8 h-[1200px] bg-white rounded-lg shadow-md p-6 flex items-center justify-center">
+                 
+             
+                
+                
+                <iframe src="cards-img.html" style="width: 100%; height:720px; " >
+                  Home content
+                </iframe>
+                
+             <!--   <p class="text-gray-500 /* text-center*/; top: 0; ">Aquí va el contenido de tu aplicación.</p> -->
+                
+            </div>
+        </main>
+        
+        <div id="right-aside" class="scroll-item w-[80vw] bg-gray-200 p-6 flex-shrink-0">
+            <h2 class="text-xl font-bold mb-4">Menú Derecho</h2>
+            <p class="text-gray-600">
+            <!--  Contenido para el menú derecho. Desliza para regresar al centro.
+            -->
+            
+            
+        
+                   </p>
+<p>
+  GRis.html
+IMG_20250910_143004_703.jpg
+IMG_20250910_143005_824.jpg
+IMG_20250910_143007_160.jpg
+README.md
+VID_20250905_193523.mp4
+VID_20250905_193742.mp4
+audio.html
+cards-img.html
+index.html
+music-Producing.html
+music.html
+</p>
+            <iframe src=".html" style="height: 720px;"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const scrollContainer = document.querySelector('.scroll-container');
+        const mainContent = document.getElementById('main-content');
+        
+        if (scrollContainer) {
+            window.onload = () => {
+                scrollContainer.scrollLeft = mainContent.offsetLeft;
+            };
+        }
+    </script>
+</body>
+  </html>   
+
+
+        <button class="open-sidebar-btn" onclick="openSidebar()" style="width:80; height: 50;">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <nav class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()" style="top:100px">×</button>
+    <a href="index.html">index</a>
+    <a href="index2.html">index2</a>
+    <a href="index3.html">index3</a>
+    <a href="config.html">⚙️ Configuración</a>
+    
+      
+      <button class="menu-btn" id="todosBtn">Todos</button>
+      <button class="menu-btn" id="motosBtn">Motos</button>
+      <button class="menu-btn" id="autosBtn">Autos</button>
+      <button class="login-btn" id="loginMenuBtn">Login</button>
+      <button class="logout-btn hidden" id="logoutMenuBtn">Salir</button>
+    </div>
+    </div>
+    
+  </nav>
+  <div class="navbar">
+    <span style="font-weight:bold;">Prof</span>
+<span>
+      <input type="text" id="searchInput" placeholder="Buscar...">
+      <button onclick="searchContent()">Buscar</button>
+    </span>
+    <ul> <span>
+ <button class="menu-btn" onclick="window.location='index.html'">Todos</button>
+   <!--   <button class="menu-btn" onclick="window.location='Projects.html'">Proyectos</button>
+      
+      <button class="menu-btn" onclick="window.location='alumn.html'">Alumnos</button>
+      <button class="menu-btn" onclick="window.location='config.html'">⚙️ Configuración</button>
+      -->
+    </span>
+  
+  </div>
+  <span>
+  <header style="background: linear-gradient(sky 0% , blue 100%);backdrop-filter:;top:70px;margin:10px">
+    <h2>interfaz</h2>
+    <p>os web</p>
+  </header>
+</span>
+  <div class="layout">
+<span>
+  <aside class="sidebar-left" style=" escale:0.9;">
+    <div class="card">
+        <ul>
+        <li><a href="all.html">Home</a></li>
+        <li><a href="#">topic</a></li>
+        <li><a href="#">1:  s </a></li>
+        <li><a href="#"> 2:   )</a></li>
+        <li><a href="#">S 3: a</a></li>
+        <li><a href="#">4:  ( )</a></li>
+        <li><a href="#"> 5:  ()</a></li>
+      </ul>
+      </div>
+    </aside>
+  </span>
+  <main class="container">
+    <div class ="container" id="main-container">
+      <iframe src="cards-main.html" style="width:720px;min-height: 100vh;"></iframe>
+    </div>
+  </main>
+
+  <aside class="sidebar-right">
+    <div>
+      <div class="card">
+        <h2>
+          
+        </h2>
+        <iframe src="right-cards.html" frameborder="0"></iframe>
+      </div>
+     </div> 
+    </div>
+    
+  </aside>
+    <!--FIN DE LAYOUT-->
+    </div>
+    
+    
+    
+  <div class="footer">-
+      <span id="currentTime" style="color:black;"></span>
+    <span>
+    <div>
+      © 2025 Os clef.
+    </div>
+    </span>
+    <div>
+      <span>
+      
+  
+      <a href="#" style="color:#fff;">Contacto</a>
+   </span>
+    </div>
+
+  </div>
+  
+  
+    <script>
+    document.getElementById('loginForm').onsubmit = function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      localStorage.setItem('userId', username);
+      document.getElementById('loginStatus').textContent = 'Sesión iniciada como: ' + username;
+    }
+  </script>
+
+  <script>
+    // Actualiza la hora
+    function showTime() {
+      document.getElementById('currentTime').textContent = new Date().toLocaleTimeString();
+    }
+    setInterval(showTime, 1000); showTime();
+
+    // Sidebar
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('active');
+      document.getElementById('sidebarOverlay').classList.add('active');
+    }
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('sidebarOverlay').classList.remove('active');
+    }
+
+    // Buscador básico
+    function searchContent() {
+      var input = document.getElementById('searchInput').value.toLowerCase();
+      var cards = document.querySelectorAll('.card');
+      cards.forEach(function (card) {
+        card.style.display = card.textContent.toLowerCase().includes(input) ? '' : 'none';
+      });
+    }
+  </script>
+
+  <p></p>
+  <!-- Project -->
+  <script src="main.js"></script>
+</body>
+</html>
+
+  </script>
+
+  <p>Nothing to see here...</p>
+  <!-- Project -->
+  <script src="main.js"></script>
+

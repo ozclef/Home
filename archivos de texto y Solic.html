@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cartas de Solicitud</title>
+  <style>
+    /* --- ESTILOS GENERALES DE LA PÁGINA --- */
+    body {
+      font-family: Georgia, serif; /* Fuente elegante, estilo carta */
+      background: #f5f5f5; /* Fondo gris claro */
+      margin: 0; /* Quita margen por defecto del navegador */
+      padding: 0;
+    }
+
+    main {
+      max-width: 900px; /* Ancho máximo del contenido */
+      margin: 2rem auto; /* 2rem arriba/abajo, centrado horizontal */
+      display: grid; 
+      grid-template-columns: 2fr 1fr; /* Layout: 2 partes main, 1 parte aside */
+      gap: 2rem; /* Espacio entre main y aside */
+    }
+
+    /* --- SECCIÓN DEL DOCUMENTO (CARTA) --- */
+    section {
+      background: #fff; /* Fondo blanco */
+      border: 2px solid #ccc; /* Borde gris */
+      border-radius: 10px; /* Bordes redondeados */
+      padding: 2rem; /* Espaciado interno */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra ligera */
+      line-height: 1.6; /* Espacio entre líneas */
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem; /* Espacio debajo de cada párrafo */
+    }
+
+    address {
+      margin-top: 2rem;
+      font-style: normal; /* Evita que se vea en cursiva */
+      text-align: right; /* Firma alineada a la derecha */
+    }
+
+    /* --- FORMULARIO EDITABLE --- */
+    form {
+      display: flex;
+      flex-direction: column; /* Campos en columna */
+    }
+    label {
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+    input {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+    }
+    button {
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #0077cc;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+
+    /* --- ASIDE (instrucciones de CSS) --- */
+    aside {
+      font-size: 0.9rem;
+      background: #fafafa;
+      border-left: 3px solid #0077cc;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+    aside h3 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <!-- Sección principal -->
+    <div>
+      <!-- Carta fija (no editable) -->
+      <section>
+        <h2>Solicitud fija</h2>
+        <p><strong>Ciudad de México, 19 de septiembre de 2025</strong></p>
+        <p><strong>Dr. Sandoval</strong><br>
+        Servicio de Psiquiatría<br>
+        IMSS<br>
+        Presente.</p>
+        <p><strong>Asunto:</strong> Solicitud de constancia médica</p>
+        <p>Estimado Dr. Sandoval:</p>
+        <p>Por medio de la presente me permito solicitar la emisión de una constancia médica para mi hermano <em>Juan Pérez López</em>, nacido el <em>01/01/2010</em>, necesaria para su inscripción en la escuela <em>Secundaria Técnica 5</em>.</p>
+        <p>Atentamente,</p>
+        <address>
+          María López<br>
+          Tel: 555-123-4567 · Correo: ejemplo@mail.com
+        </address>
+      </section>
+
+      <!-- Carta editable (con formulario) -->
+      <section>
+        <h2>Solicitud editable</h2>
+        <form id="formSolicitud">
+          <label>Ciudad y fecha:</label>
+          <input type="text" id="fecha" placeholder="Ej. Ciudad de México, 19 de septiembre de 2025">
+          
+          <label>Nombre del menor:</label>
+          <input type="text" id="menor" placeholder="Ej. Juan Pérez López">
+
+          <label>Fecha de nacimiento:</label>
+          <input type="text" id="nacimiento" placeholder="Ej. 01/01/2010">
+
+          <label>Escuela:</label>
+          <input type="text" id="escuela" placeholder="Ej. Secundaria Técnica 5">
+
+          <label>Tu nombre:</label>
+          <input type="text" id="nombre" placeholder="Ej. María López">
+
+          <label>Teléfono:</label>
+          <input type="text" id="tel" placeholder="Ej. 555-123-4567">
+
+          <label>Correo:</label>
+          <input type="email" id="correo" placeholder="ejemplo@mail.com">
+
+          <button type="button" onclick="generarSolicitud()">Generar Solicitud</button>
+        </form>
+
+        <div id="resultado"></div>
+      </section>
+    </div>
+
+    <!-- Aside con explicación de CSS -->
+    <aside>
+      <h3>Notas de CSS</h3>
+      <ul>
+        <li><code>margin</code>: espacio fuera del elemento.</li>
+        <li><code>padding</code>: espacio dentro del borde.</li>
+        <li><code>border</code>: grosor, estilo y color del borde.</li>
+        <li><code>border-radius</code>: redondea esquinas.</li>
+        <li><code>box-shadow</code>: agrega sombra.</li>
+        <li><code>line-height</code>: altura entre líneas de texto.</li>
+        <li><code>grid-template-columns</code>: define columnas en un grid (ej. 2fr 1fr → dos tercios y un tercio).</li>
+        <li><code>gap</code>: espacio entre columnas o filas en un grid/flexbox.</li>
+      </ul>
+    </aside>
+  </main>
+
+  <script>
+    // Generar la carta editable
+    function generarSolicitud() {
+      const fecha = document.getElementById("fecha").value;
+      const menor = document.getElementById("menor").value;
+      const nacimiento = document.getElementById("nacimiento").value;
+      const escuela = document.getElementById("escuela").value;
+      const nombre = document.getElementById("nombre").value;
+      const tel = document.getElementById("tel").value;
+      const correo = document.getElementById("correo").value;
+
+      const texto = `
+        <h3>Solicitud generada</h3>
+        <p><strong>${fecha}</strong></p>
+        <p><strong>Dr. Sandoval</strong><br>Servicio de Psiquiatría<br>IMSS<br>Presente.</p>
+        <p><strong>Asunto:</strong> Solicitud de constancia médica</p>
+        <p>Estimado Dr. Sandoval:</p>
+        <p>Por medio de la presente me permito solicitar la emisión de una constancia médica para mi hermano <em>${menor}</em>, nacido el <em>${nacimiento}</em>, necesaria para su inscripción en la escuela <em>${escuela}</em>.</p>
+        <p>Atentamente,</p>
+        <address>${nombre}<br>Tel: ${tel} · Correo: ${correo}</address>
+      `;
+
+      document.getElementById("resultado").innerHTML = texto;
+    }
+  </script>
+
+</body>
+</html>

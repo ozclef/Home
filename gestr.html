@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+				<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+				<title>1-Files panel!</title>
+</head>
+<body>
+				<h1>
+1-								files panel , aun no muestra
+				</h1>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Panel Local de Archivos</title>
+  <style>
+    body { font-family: sans-serif; background: #f3f4f6; padding: 20px }
+    .control { margin-bottom: 20px }
+    .card { background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,.1); padding: 20px; margin-bottom: 20px }
+    .file-item { border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px; margin-top: 10px }
+    .file-item img, .file-item video { width: 100%; border-radius: 4px; margin-top: 10px }
+  </style>
+</head>
+<body>
+  <h1>Mi Panel de Archivos</h1>
+
+  <div class="control">
+    <!-- Enfoque A: seleccionar carpeta local -->
+    <label>
+      Selecciona carpeta:
+      <input type="file" id="folderInput" webkitdirectory multiple>
+    </label>
+    <!-- Filtro rápido -->
+    <input type="text" id="search" placeholder="Filtrar por nombre o extensión">
+  </div>
+
+  <div id="file-list"></div>
+
+  <script src="app.js"></script>
+				
+				<!--
+</body>
+</html>
+				
+				
+2. app.js: Lectura y Renderizado
+js
+				
+				
+		-	
+				
+				
+				<input type="file" id="fileInput" multiple>
+<div id="mediaGrid"></div>
+
+<script>
+const inputEl = document.getElementById('fileInput');
+const gridEl  = document.getElementById('mediaGrid');
+
+const IMG_EXT = ['jpg','jpeg','png','gif','webp'];
+const VID_EXT = ['mp4','webm','ogg'];
+const AUD_EXT = ['mp3','wav','aac'];
+const IFR_EXT = ['pdf','html','htm'];
+
+inputEl.addEventListener('change', () => {
+  gridEl.innerHTML = '';
+  Array.from(inputEl.files)
+    .sort((a,b) => a.lastModified - b.lastModified) // ordena por fecha más antigua
+    .forEach(file => {
+      const localURL = URL.createObjectURL(file);
+      const repoURL  = "/" + file.name; // ruta para GitHub Pages
+      const ext      = file.name.split('.').pop().toLowerCase();
+      const fechaMod = new Date(file.lastModified).toLocaleString();
+      const fechaNom = (file.name.match(/\d{4}/) || [])[0] || "Sin fecha en nombre";
+
+      const elem     = getMediaElement(ext, localURL, file.name);
+      const snippet  = generateSnippet(repoURL, file.name, ext);
+      const card     = createCard(file.name, ext, elem, snippet, fechaMod, fechaNom);
+      gridEl.appendChild(card);
+    });
+});
+
+function getMediaElement(ext, src, name) {
+  if (IMG_EXT.includes(ext)) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = name;
+    return img;
+  }
+  if (VID_EXT.includes(ext)) {
+    const video = document.createElement('video');
+    video.controls = true;
+    video.src = src;
+    return video;
+  }
+  if (AUD_EXT.includes(ext)) {
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.src = src;
+    return audio;
+  }
+  if (IFR_EXT.includes(ext)) {
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    return iframe;
+  }
+  const link = document.createElement('a');
+  link.href = src;
+  link.target = '_blank';
+  link.textContent = 'Abrir ' + name;
+  return link;
+}
+
+function generateSnippet(path, name, ext) {
+  let tag;
+  if (IMG_EXT.includes(ext)) {
+    tag = `<img src="${path}" alt="${name}" style="width:100%;">`;
+  } else if (VID_EXT.includes(ext)) {
+    tag = `<video controls src="${path}" style="width:100%;"></video>`;
+  } else if (AUD_EXT.includes(ext)) {
+    tag = `<audio controls src="${path}" style="width:100%;"></audio>`;
+  } else if (IFR_EXT.includes(ext)) {
+    tag = `<iframe src="${path}" style="width:100%; height:200px; border:none;"></iframe>`;
+  } else {
+    tag = `<a href="${path}" target="_blank" style="display:inline-block; width:100%;">Descarga ${name}</a>`;
+  }
+  return `<div style="width:100%; margin:1em 0;">\n  ${tag}\n</div>`;
+}
+
+function createCard(name, ext, mediaEl, snippet, fechaMod, fechaNom) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style = "background:#fff; padding:10px; margin:10px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);";
+
+  const mediaWrapper = document.createElement('div');
+  mediaWrapper.appendChild(mediaEl);
+
+  const info = document.createElement('div');
+  info.innerHTML = `
+    <p><strong>${name}</strong> (${ext})</p>
+    <p>📅 Fecha (nombre): ${fechaNom}</p>
+    <p>🕒 Última modif.: ${fechaMod}</p>
+    <textarea readonly style="width:100%; height:80px;">${snippet}</textarea>
+  `;
+
+  card.appendChild(mediaWrapper);
+  card.appendChild(info);
+  return card;
+}
+</script>
+
+				
+				
+				<!--
+				fin del 2do script
+				
+				1er script
+				
+				-->
+				
+<script>
+const folderInput = document.getElementById('folderInput');
+const searchInput = document.getElementById('search');
+const fileList = document.getElementById('file-list');
+
+let files = [];
+
+// Maneja selección de carpeta
+folderInput.addEventListener('change', e => {
+  files = Array.from(e.target.files).map(file => {
+    const type = file.type.startsWith('image/') ? 'image'
+               : file.type.startsWith('video/') ? 'video'
+               : file.type.startsWith('audio/') ? 'audio'
+               : 'document';
+    return {
+      name: file.name,
+      type,
+      url: URL.createObjectURL(file)
+    };
+  });
+  renderFiles(files);
+});
+
+// Filtrado en tiempo real
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase();
+  renderFiles(files.filter(f => f.name.toLowerCase().includes(q)));
+});
+
+// Función para mostrar tarjetas
+function renderFiles(list) {
+  fileList.innerHTML = '';
+  list.forEach(f => {
+    const div = document.createElement('div');
+    div.className = 'card file-item';
+    let inner = `<p><strong>Nombre:</strong> ${f.name}</p><p><strong>Tipo:</strong> ${f.type}</p>`;
+
+    if (f.type === 'image')
+      inner += `<img src="${f.url}" alt="${f.name}">`;
+    else if (f.type === 'video')
+      inner += `<video controls src="${f.url}"></video>`;
+    else if (f.type === 'audio')
+      inner += `<audio controls src="${f.url}"></audio>`;
+    else
+      inner += `<a href="${f.url}" target="_blank">Abrir documento</a>`;
+
+    div.innerHTML = inner;
+    fileList.appendChild(div);
+  });
+}
+//3. Enfoque Alternativo: manifest.json
+//Si subes tu sitio a GitHub Pages o cualquier servidor estático, puedes generar un archivo manifest.json que liste nombres y tipos de tus archivos. Luego:
+				//Coloca manifest.json en la raíz (o carpeta /data/):
+
+//json
+[
+  {"name":"Playa.jpg","type":"image"},
+  {"name":"Montaña.mp4","type":"video"},
+  {"name":"Contrato.pdf","type":"document"},
+  {"name":"Cancion.mp3","type":"audio"}
+]
+				
+				
+				</script>
+				<!--
+En tu app.js, reemplaza el listener de folderInput por un fetch('/manifest.json'), mapeando cada entrada a una URL relativa (./assets/${name}).
+
+Esto te permite mantener rutas simples (/assets/Playa.jpg) y no tocar cada nombre cuando subes archivos.
+
+4. Consideraciones de Seguridad y Alcance
+Los navegadores no permiten listar automáticamente tu sistema de archivos sin interacción del usuario. Por razones de seguridad, necesitas que el usuario seleccione la carpeta (webkitdirectory) o montar un servicio que devuelva la lista (manifest.json).
+
+Para un proyecto en GitHub Pages, el enfoque de manifest es más sólido; en entornos controlados (intranet o kiosco), webkitdirectory es rápido y local.
+
+¿Te gustaría ver un ejemplo de generación automática de manifest.json con Node.js/GitHub Actions, o prefieres pulir la versión con <input> y añadir paginación y selección por tipo de archivo?

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+			<title>plantilla!</title>
+
+
+
+<!--
+file:///storage/emulated/0/index.html
+<!--
+
+
+HTML
+
+
+
+
+
+<head>
+  <!-- Metadatos y Estilos -->
+</head>
+<body>
+  <iframe src="file:///storage/emulated/0/" style="min-height:50vh; width:100px;"></iframe>
+  <p>new.</p>
+</body>
+</html>
+<!--
+
+
+Estructura Detallada
+<head>: Contiene los metadatos esenciales para la página, como el juego de caracteres (<meta charset="UTF-8">), la compatibilidad con navegadores (<meta http-equiv="X-UA-Compatible" content="IE=Edge">), y la configuración de la vista para que sea responsiva en dispositivos móviles (<meta name="viewport" content="width=device-width, initial-scale=1.0">).
+
+
+<body>: El cuerpo de la página, que solo contiene el iframe y un simple párrafo.
+
+<iframe>: Este es el elemento clave y la causa de tus problemas. Un iframe incrusta otra página web 
+</p>
+
+
+ como Desarrollador") para que puedas analizarlas tranquilamente.
+
+Código de all.html (Aplicación Responsiva)
+Sección de Estilos (<style>)
+
+CSS
+-->
+<head>
+<style>
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: sans-serif;
+    background-color: #f3f4f6;
+}
+
+.scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+}
+
+.scroll-item {
+    scroll-snap-align: center;
+}
+
+</style>
+
+
+<!--
+
+Sección de Scripts (<script>)
+
+-->
+
+Código de index.html (Tu Camino como Desarrollador)
+Sección de Estilos (<style>)
+
+CSS
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+.hero-bg {
+    background-color: #111827;
+    background-image: linear-gradient(145deg, #1f2937 0%, #111827 100%);
+}
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    max-height: 400px;
+}
+@media (min-width: 768px) {
+   .chart-container {
+        height: 400px;
+    }
+}
+.card {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+.step-line {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 1.5rem;
+    bottom: -1.5rem;
+    width: 2px;
+    background-color: #d1d5db;
+    transform: translateX(-50%);
+}
+.step:last-child.step-line {
+    display: none;
+}	
+
+
+</style>
+</head>
+
+
+<body>
+
+
+
+
+<!--
+Sección de Scripts (<script>)
+-->
+
+<script>
+
+//JavaScript
+
+
+
+
+
+const scrollContainer = document.querySelector('.scroll-container');
+const mainContent = document.getElementById('main-content');
+        
+if (scrollContainer) {
+    window.onload = () => {
+        scrollContainer.scrollLeft = mainContent.offsetLeft;
+    };
+}
+
+//JavaScript
+
+document.addEventListener('DOMContentLoaded', () => {
+    const salaryData = {
+        frontend: ,
+        backend: ,
+        fullstack: ,
+        devops: 
+    };
+
+    const labels =;
+    const ctx = document.getElementById('salaryChart').getContext('2d');
+            
+    const chartConfig = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets:
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + new Intl.NumberFormat('en-US').format(value);
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label |
+
+| '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y!== null) {
+                                label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                            }
+                            return label;
+                        }
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    };
+
+    let salaryChart = new Chart(ctx, chartConfig);
+
+    const filterButtons = document.querySelectorAll('.spec-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const spec = button.dataset.spec;
+            const specTitle = button.textContent;
+            
+            // Update chart data
+            salaryChart.data.datasets.data = salaryData[spec];
+            salaryChart.data.datasets.label = `Proyección Salarial ${specTitle}`;
+            salaryChart.update();
+
+            // Update button styles
+            filterButtons.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            button.classList.add('bg-blue-600', 'text-white');
+            button.classList.remove('bg-gray-200', 'text-gray-700');
+        });
+    });
+});
+
+										<h1>
+																				here body
+										</h1>
+</body>
+</html>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">

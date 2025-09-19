@@ -1,0 +1,344 @@
+
+
+
+
+<!--
+
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OHANA- FAMILY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* General Styles */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: sans-serif;
+            background-color: #f3f4f6;
+            scroll-behavior: smooth;
+        }
+        
+        /* Mobile Horizontal Scroll */
+        .scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+
+        .scroll-item {
+            scroll-snap-align: center;
+        }
+        
+        /* Video Aspect Ratio */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Sidebar and Buttons */
+        .open-sidebar-btn {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 30;
+            width: 70px;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+    <div class="hidden md:grid md:grid-cols-[280px_1fr_280px] h-full">
+        <aside class="w-full bg-gray-800 text-white p-6 shadow-lg overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú</h2>
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="#dashboard" class="text-blue-300 hover:text-blue-100">Dashboard</a></li>
+                    <li class="mb-2"><a href="#galeria" class="text-blue-300 hover:text-blue-100">Galería de Recuerdos</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="w-full h-full p-8 overflow-y-auto">
+            <div id="dashboard" class="max-w-4xl mx-auto mb-12">
+                <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+                <p class="text-gray-700 leading-relaxed">Bienvenido a tu panel de control. Aquí puedes ver un resumen de los datos y la información clave de tu proyecto.</p>
+                <div class="mt-8 h-96 bg-white rounded-lg shadow-md p-6 flex items-center justify-center">
+                    <p class="text-gray-500 text-center">Aquí van los gráficos y datos de tu dashboard.</p>
+                </div>
+            </div>
+            
+            <div id="galeria" class="max-w-4xl mx-auto">
+                <h1 class="text-3xl font-bold mb-4">Recuerdos</h1>
+                <p class="text-gray-700 leading-relaxed mb-6">Un espacio dedicado a los momentos especiales que compartiste, mostrados de manera cronológica.</p>
+                <div id="gallery-container" class="relative w-full overflow-hidden rounded-lg shadow-lg bg-gray-100">
+                    <div id="gallery-track" class="flex transition-transform duration-500 ease-in-out">
+                        <div class="gallery-item flex-shrink-0 w-full p-6 text-center">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-4">14 de Julio - Cumpleaños de la Abuelita</h2>
+                            <p class="text-sm text-gray-600 mb-6">Un día lleno de alegría y amor para celebrar un año más de vida.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <img src="images/14 de 07 de 2025_foto1.jpg" alt="Cumpleaños de la abuelita" class="w-full h-auto rounded-lg shadow-md">
+                                <img src="images/14 de 07 de 2025_foto2.jpg" alt="Cumpleaños de la abuelita" class="w-full h-auto rounded-lg shadow-md">
+                                <div class="video-wrapper">
+                                    <video controls class="w-full h-full rounded-lg shadow-md">
+                                        <source src="images/14 de 07 de 2025_video.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item flex-shrink-0 w-full p-6 text-center">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-4">5 de Septiembre - Mi Cumpleaños</h2>
+                            <p class="text-sm text-gray-600 mb-6">Momentos inolvidables compartidos con las personas que más quiero en mi día.</p>
+                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <img src="images/05 de 09 de 2025_foto1.jpg" alt="Mi Cumpleaños" class="w-full h-auto rounded-lg shadow-md">
+                                <div class="video-wrapper">
+                                     <video controls class="w-full h-full rounded-lg shadow-md">
+                                        <source src="images/05 de 09 de 2025_video.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <img src="images/05 de 09 de 2025_foto2.jpg" alt="Mi Cumpleaños" class="w-full h-auto rounded-lg shadow-md">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-200 focus:outline-none">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="nextBtn" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-200 focus:outline-none">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="w-full bg-gray-200 p-6 shadow-lg overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú Derecho</h2>
+            <div class="bg-white rounded-lg p-4 shadow-md mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">El Valor del Programador</h3>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                				<!--
+                    El profesionalismo y la ética de un programador se basan en reglas, principios y normas que siempre hay que seguir. En el momento en que un programador captura informáticamente en código situaciones de la vida real o cómo resolver problemas, debido a que no solo involucra matemáticas, álgebra e incluso más allá de la filosofía, captura mucho más que solo datos.
+                				
+                				-->
+                </p>
+            </div>
+        </aside>
+    </div>
+
+    <div id="mobile-layout" class="md:hidden w-screen h-full flex flex-row flex-nowrap scroll-container">
+        <div id="left-aside" class="scroll-item w-[80vw] bg-gray-800 text-white p-6 flex-shrink-0">
+            <h2 class="text-xl font-bold mb-4">Menú</h2>
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="#" onclick="scrollToSection('main-content')" class="text-blue-300 hover:text-blue-100">Dashboard</a></li>
+                    <li class="mb-2"><a href="#" onclick="scrollToSection('galeria-mobile')" class="text-blue-300 hover:text-blue-100">Galería</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main id="main-content" class="scroll-item w-screen p-8 overflow-y-auto flex-shrink-0">
+            <div id="dashboard-mobile" class="mb-12">
+                <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+                <p class="text-gray-700 leading-relaxed">Bienvenido a tu panel de control.</p>
+                <div class="mt-8 h-96 bg-white rounded-lg shadow-md p-6 flex items-center justify-center">
+                    <p class="text-gray-500 text-center">Aquí van los gráficos.</p>
+                </div>
+            </div>
+            
+            <div id="galeria-mobile" class="max-w-4xl mx-auto">
+                <h1 class="text-3xl font-bold mb-4">Recuerdos</h1>
+                <p class="text-gray-700 leading-relaxed mb-6">Momentos especiales con ella.</p>
+                <div id="gallery-container-mobile" class="relative w-full overflow-hidden rounded-lg shadow-lg bg-gray-100">
+                    <div id="gallery-track-mobile" class="flex transition-transform duration-500 ease-in-out">
+                        <div class="gallery-item-mobile flex-shrink-0 w-full p-6 text-center">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-4">14 de Julio</h2>
+                            <p class="text-sm text-gray-600 mb-6">Cumpleaños de la Abuelita</p>
+                            <img src="images/14 de 07 de 2025_foto1.jpg" alt="Cumpleaños de la abuelita" class="w-full h-auto rounded-lg shadow-md">
+                            <div class="video-wrapper mt-4">
+                                <video controls class="w-full h-full rounded-lg shadow-md">
+                                    <source src="images/14 de 07 de 2025_video.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item-mobile flex-shrink-0 w-full p-6 text-center">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-4">5 de Septiembre</h2>
+                            <p class="text-sm text-gray-600 mb-6">Mi Cumpleaños</p>
+                            <img src="images/05 de 09 de 2025_foto1.jpg" alt="Mi Cumpleaños" class="w-full h-auto rounded-lg shadow-md">
+                            <div class="video-wrapper mt-4">
+                                <video controls class="w-full h-full rounded-lg shadow-md">
+                                    <source src="images/05 de 09 de 2025_video.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div id="right-aside" class="scroll-item w-[80vw] bg-gray-200 p-6 flex-shrink-0 overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú Derecho</h2>
+            <div class="bg-white rounded-lg p-4 shadow-md mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">El Valor del Programador</h3>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    El profesionalismo y la ética de un programador se basan en reglas, principios y normas que siempre hay que seguir.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Your JavaScript logic here
+        const scrollContainer = document.querySelector('.scroll-container');
+        const mainContent = document.getElementById('main-content');
+        const galleryTrack = document.getElementById('gallery-track');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentGalleryIndex = 0;
+
+        if (scrollContainer) {
+            window.onload = () => {
+                scrollContainer.scrollLeft = mainContent.offsetLeft;
+            };
+        }
+
+        if (galleryTrack) {
+            const galleryItems = galleryTrack.querySelectorAll('.gallery-item');
+            const totalItems = galleryItems.length;
+
+            nextBtn.addEventListener('click', () => {
+                currentGalleryIndex = (currentGalleryIndex + 1) % totalItems;
+                updateGalleryPosition();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentGalleryIndex = (currentGalleryIndex - 1 + totalItems) % totalItems;
+                updateGalleryPosition();
+            });
+
+            const updateGalleryPosition = () => {
+                const itemWidth = galleryItems[0].offsetWidth;
+                galleryTrack.style.transform = `translateX(${-currentGalleryIndex * itemWidth}px)`;
+            };
+
+            // Mobile gallery functionality
+            const galleryTrackMobile = document.getElementById('gallery-track-mobile');
+            const galleryItemsMobile = galleryTrackMobile.querySelectorAll('.gallery-item-mobile');
+            const totalItemsMobile = galleryItemsMobile.length;
+            let currentMobileIndex = 0;
+
+            let startX = 0;
+            let endX = 0;
+
+            galleryTrackMobile.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            galleryTrackMobile.addEventListener('touchmove', (e) => {
+                endX = e.touches[0].clientX;
+            });
+
+            galleryTrackMobile.addEventListener('touchend', () => {
+                const swipeThreshold = 50;
+                if (startX - endX > swipeThreshold) {
+                    currentMobileIndex = (currentMobileIndex + 1) % totalItemsMobile;
+                } else if (endX - startX > swipeThreshold) {
+                    currentMobileIndex = (currentMobileIndex - 1 + totalItemsMobile) % totalItemsMobile;
+                }
+                updateMobileGalleryPosition();
+            });
+
+            const updateMobileGalleryPosition = () => {
+                const itemWidthMobile = galleryItemsMobile[0].offsetWidth;
+                galleryTrackMobile.style.transform = `translateX(${-currentMobileIndex * itemWidthMobile}px)`;
+            };
+        }
+
+        // Mobile navigation function
+        window.scrollToSection = (sectionId) => {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                if (sectionId === 'galeria-mobile') {
+                    // Specific scroll to mobile gallery
+                    scrollContainer.scrollLeft = section.parentElement.parentElement.offsetLeft;
+                    document.getElementById('gallery-container-mobile').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    scrollContainer.scrollLeft = section.offsetLeft;
+                }
+            }
+        };
+    </script>
+</body>
+</html>
+<!--
+Adding More Multimedia: Audio and Videos 🎥🎶
+You asked about adding audio, videos, and other multimedia. You've already got a great start with video tags! Here's how you can expand on that:
+
+1. Videos
+You're already using the <video> tag, which is the correct way to embed videos. To make it more robust, you can add multiple <source> tags for different video formats. This ensures the video will play on most browsers.
+
+Example:
+
+HTML
+
+<video controls class="w-full h-full rounded-lg shadow-md">
+    <source src="video-name.mp4" type="video/mp4">
+    <source src="video-name.ogg" type="video/ogg">
+    Your browser does not support the video tag.
+</video>
+
+
+
+<!--
+
+
+You could also add a thumbnail image that shows before the video starts to improve the user experience. You'd use the poster attribute for this.
+
+HTML
+
+<video controls poster="images/video-thumbnail.jpg" class="w-full h-full rounded-lg shadow-md">
+    <source src="images/14 de 07 de 2025_video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+2. Audio 🎶
+For audio, you'll use the <audio> tag, which works similarly to the video tag. This is perfect for background music or special audio clips. You can also add controls to let the user play/pause the music.
+
+HTML
+-->
+
+<div class="mt-4">
+    <p class="text-gray-700">Música de fondo para recordar este momento:</p>
+    <audio controls>
+        <source src="audios/ohana-song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+
+
+				<!--
+
+<head>
+    <meta charse

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+				<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+				<title>PanelAdmin Autos</title>
+				<!--
+</head>
+<body>
+				<h1>
+								Hello, World!
+				</h1>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+  <head>
+				
+				-->
+    <base target="_top">
+  </head>
+  <body>
+  				
+    Google script host close
+  				
+  				
+    <input type="button" value="Close"
+        onclick="google.script.host.close()" />
+  				
+  				
+  				<script>
+  				
+  				
+  				function doGet() {
+  return HtmlService.createHtmlOutputFromFile('Index');
+}
+  								// Use this code for Google Docs, Slides, Forms, or Sheets.
+  								
+function onOpen() {
+				
+  SpreadsheetApp.getUi() 
+				
+				
+				// Or DocumentApp or SlidesApp or FormApp.
+      .createMenu('Dialog')
+      .addItem('Open', 'openDialog')
+      .addToUi();
+}
+
+function openDialog() {
+  var html = HtmlService.createHtmlOutputFromFile('Index');
+  SpreadsheetApp.getUi() 
+				
+				// Or DocumentApp or SlidesApp or FormApp.
+				
+				
+      .showModalDialog(html, 'Dialog title');
+}
+  				</script>
+  </body>
+</html>
+
+
+HTML
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Plantilla de Venta de Autos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f5f5f5;
+    }
+
+    /* Background Image with Blur Effect */
+    body {
+      background: url('https://images.unsplash.com/photo-1511918984145-48de785d4c4e?fit=crop&w=1200&q=80') center/cover no-repeat;
+      min-height: 100vh;
+      position: relative;
+    }
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: inherit;
+      filter: blur(12px) brightness(0.7);
+      z-index: -1;
+    }
+
+    /* Navbar and Footer */
+    .navbar, .footer {
+      background: #1e293b;
+      color: #fff;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 10; }
+    .footer { position: fixed; bottom: 0; left: 0; right: 0; font-size: 0.95em; }
+    .container {
+      padding: 80px 16px 60px 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Buttons */
+    .menu-btn, .login-btn, .logout-btn {
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 18px;
+      cursor: pointer;
+      margin: 0 4px;
+      font-size: 1em;
+    }
+    .menu-btn.active { background: #16a34a; }
+    .crud-btn {
+      background: #0ea5e9;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 7px 14px;
+      cursor: pointer;
+      margin-right: 8px;
+      font-size: 0.95em;
+    }
+
+    /* Cards and Form Inputs */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(30,41,59,0.09);
+      margin: 16px 0;
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .login-form input {
+      padding: 8px;
+      border: 1px solid #d1d5db;
+      margin-right: 10px;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .hidden { display: none; }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 220px;
+      height: 100%;
+      background: #1e293bdd;
+      color: #fff;
+      padding: 30px 18px;
+      box-shadow: 2px 0 12px rgba(30,41,59,0.12);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      transition: transform 0.3s;
+      transform: translateX(-100%);
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 8px 0;
+    }
+    .sidebar hr {
+      border: none;
+      border-top: 1px solid #64748b;
+      margin: 12px 0;
+    }
+    .sidebar .close-btn {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      font-size: 2em;
+      color: #fff;
+      cursor: pointer;
+      margin-bottom: 18px;
+    }
+    .open-sidebar-btn {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-size: 1.5em;
+      z-index: 101;
+      cursor: pointer;
+    }
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div>
+      <strong>Venta de Autos</strong>
+    </div>
+    <div>
+      <button class="menu-btn" id="todosBtn">Todos</button>
+      <button class="menu-btn" id="motosBtn">Motos</button>
+      <button class="menu-btn" id="autosBtn">Autos</button>
+      <button class="login-btn" id="loginMenuBtn">Login</button>
+      <button class="logout-btn hidden" id="logoutMenuBtn">Salir</button>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <button onclick="closeSidebar()" class="close-btn">&times;</button>
+    <a href="#" onclick="setTipo('todos')">Todos</a>
+    <a href="#" onclick="setTipo('autos')">Autos</a>
+    <a href="#" onclick="setTipo('motos')">Motos</a>
+    <hr>
+    <a href="#" onclick="mostrarLogin()">Login</a>
+  </div>
+  <button class="open-sidebar-btn" onclick="openSidebar()">☰</button>
+
+  <div class="container" id="mainContent">
+    <h2>Bienvenido a la tienda de Vehículos</h2>
+    <p>Compra y vende autos y motos fácilmente.</p>
+  </div>
+  
+  <div class="container hidden" id="loginPage">
+    <h2>Iniciar sesión Panel Admin</h2>
+    <form class="login-form" id="loginForm">
+      <input type="text" id="usuario" placeholder="Usuario" required>
+      <input type="password" id="clave" placeholder="Clave" required>
+      <button type="submit" class="login-btn">Ingresar</button>
+    </form>
+    <div id="loginError" style="color:#dc2626; margin-top:10px;"></div>
+  </div>
+
+  <div class="container hidden" id="crudPage">
+    <h2>Panel de Administración</h2>
+    <div id="crudList"></div>
+    <button class="crud-btn" id="addItemBtn">Agregar Nuevo Vehículo</button>
+    <div id="addForm" class="hidden">
+      <input type="text" id="itemNombre" placeholder="Marca y modelo">
+      <input type="text" id="itemTipo" placeholder="Tipo: auto/moto">
+      <input type="text" id="itemPrecio" placeholder="Precio">
+      <input type="text" id="itemImagen" placeholder="URL de imagen (opcional)">
+      <button class="crud-btn" id="saveItemBtn">Guardar</button>
+      <button class="crud-btn" id="cancelItemBtn" style="background:#64748b;">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      © 2025 Venta de Autos.
+    </div>
+    <div>
+      <a href="#" style="color:#fff;">Contacto</a>
+    </div>
+  </div>
+  
+  <script>
+    let usuarioAutenticado = false;
+    let tipoActual = "todos";
+    let items = [
+      {id:1, nombre:"Toyota Corolla", tipo:"auto", precio:"$50,000", imagen:"https://images.unsplash.com/photo-1511918984145-48de785d4c4e?fit=crop&w=400&q=80"},
+      {id:2, nombre:"Honda Civic", tipo:"auto", precio:"$42,500", imagen:"https://images.unsplash.com/photo-1461632830798-3adb3034e4c8?fit=crop&w=400&q=80"},
+      {id:3, nombre:"Volkswagen Golf", tipo:"auto", precio:"$93,200", imagen:"https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?fit=crop&w=400&q=80"},
+      {id:4, nombre:"BMW Serie 3", tipo:"auto", precio:"$72,950", imagen:"https://images.unsplash.com/photo-1511918984145-48de785d4c4e?fit=crop&w=400&q=80"},
+      {id:5, nombre:"Kawasaki Ninja", tipo:"moto", precio:"$50,000", imagen:"https://images.unsplash.com/photo-1519864600264-2b6f1babe3a8?fit=crop&w=400&q=80"},
+      {id:6, nombre:"Harley Davidson", tipo:"moto", precio:"$100,500", imagen:"https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?fit=crop&w=400&q=80"},
+      {id:7, nombre:"Yamaha FZ", tipo:"moto", precio:"$93,200", imagen:"https://images.unsplash.com/photo-1461632830798-3adb3034e4c8?fit=crop&w=400&q=80"},
+      {id:8, nombre:"Suzuki GN", tipo:"moto", precio:"$72,950", imagen:"https://images.unsplash.com/photo-1519864600264-2b6f1babe3a8?fit=crop&w=400&q=80"}
+    ];
+    let nextId = items.length + 1;
+    let editId = null;
+
+    // Sidebar functions
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('active');
+    }
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('active');
+    }
+    window.onclick = function(e) {
+      const sidebar = document.getElementById('sidebar');
+      const openBtn = document.querySelector('.open-sidebar-btn');
+      if (!sidebar.contains(e.target) && !openBtn.contains(e.target) && sidebar.classList.contains('active')) {
+        closeSidebar();
+      }
+    };
+
+    // Page navigation functions
+    function mostrarLanding() {
+      document.getElementById('mainContent').classList.remove('hidden');
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('crudPage').classList.add('hidden');
+      document.getElementById('loginMenuBtn').classList.remove('hidden');
+      document.getElementById('logoutMenuBtn').classList.add('hidden');
+      cargarItems();
+    }
+    function mostrarLogin() {
+      document.getElementById('mainContent').classList.add('hidden');
+      document.getElementById('crudPage').classList.add('hidden');
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('loginMenuBtn').classList.add('hidden');
+      document.getElementById('logoutMenuBtn').classList.add('hidden');
+    }
+    function mostrarCrud() {
+      document.getElementById('mainContent').classList.add('hidden');
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('crudPage').classList.remove('hidden');
+      document.getElementById('loginMenuBtn').classList.add('hidden');
+      document.getElementById('logoutMenuBtn').classList.remove('hidden');
+      cargarItems();
+    }
+
+    // Event listeners
+    document.getElementById('loginMenuBtn').onclick = mostrarLogin;
+    document.getElementById('logoutMenuBtn').onclick = () => {
+      usuarioAutenticado = false;
+      mostrarLanding();
+    };
+
+    function setTipo(tipo) {
+      tipoActual = tipo;
+      document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+      const btnMap = { "todos": "todosBtn", "motos": "motosBtn", "autos": "autosBtn" };
+      document.getElementById(btnMap[tipo]).classList.add('active');
+      cargarItems();
+      closeSidebar(); // Cierra el sidebar al seleccionar una opción
+    }
+    document.getElementById('todosBtn').onclick = () => setTipo('todos');
+    document.getElementById('motosBtn').onclick = () => setTipo('motos');
+    document.getElementById('autosBtn').onclick = () => setTipo('autos');
+
+    document.getElementById('loginForm').onsubmit = function(e){
+      e.preventDefault();
+      // Simple authentication check. In a real app, you'd use a server.
+      const user = document.getElementById('usuario').value;
+      const pass = document.getElementById('clave').value;
+      if (user === "admin" && pass === "123"){ // Example credentials
+        usuarioAutenticado = true;
+        document.getElementById('loginError').innerText = "";
+        mostrarCrud();
+      } else {
+        document.getElementById('loginError').innerText = "Usuario o clave incorrecta.";
+      }
+    };
+
+    // CRUD logic
+    function cargarItems(){
+      if (!usuarioAutenticado){
+        let html = `<h2>Vehículos disponibles: ${tipoActual.charAt(0).toUpperCase() + tipoActual.slice(1)}</h2>`;
+        const filtrados = tipoActual === "todos" ? items : items.filter(i => i.tipo === tipoActual);
+        filtrados.forEach(item => {
+          html += `<div class="card">
+            <img src="${item.imagen || 'https://via.placeholder.com/400x200'}" alt="${item.nombre}">
+            <strong>${item.nombre}</strong>
+            <span>Tipo: ${item.tipo}</span>
+            <span>Precio: ${item.precio}</span>
+          </div>`;
+        });
+        document.getElementById('mainContent').innerHTML = html;
+      } else {
+        let html = "";
+        items.forEach(item => {
+          html += `<div class="card">
+            <img src="${item.imagen || 'https://via.placeholder.com/400x200'}" alt="${item.nombre}">
+            <strong>${item.nombre}</strong>
+            <span>Tipo: ${item.tipo}</span>
+            <span>Precio: ${item.precio}</span>
+            <button class="crud-btn" onclick="editarItem(${item.id})">Editar</button>
+            <button class="crud-btn" style="background:#dc2626;" onclick="eliminarItem(${item.id})">Eliminar</button>
+          </div>`;
+        });
+        document.getElementById('crudList').innerHTML = html;
+      }
+    }
+    document.getElementById('addItemBtn').onclick = () => {
+      editId = null;
+      document.getElementById('addForm').classList.remove('hidden');
+      document.getElementById('itemNombre').value = "";
+      document.getElementById('itemTipo').value = "";
+      document.getElementById('itemPrecio').value = "";
+      document.getElementById('itemImagen').value = "";
+    };
+    document.getElementById('cancelItemBtn').onclick = () => {
+      document.getElementById('addForm').classList.add('hidden');
+    };
+    document.getElementById('saveItemBtn').onclick = () => {
+      const nombre = document.getElementById('itemNombre').value;
+      const tipo = document.getElementById('itemTipo').value;
+      const precio = document.getElementById('itemPrecio').value;
+      const imagen = document.getElementById('itemImagen').value;
+      
+      if (!nombre || !tipo || !precio) {
+        alert("Completa todos los campos");
+        return;
+      }
+      if (editId){
+        const idx = items.findIndex(i => i.id === editId);
+        if (idx > -1){
+          items[idx] = {id: editId, nombre, tipo, precio, imagen};
+        }
+      } else {
+        items.push({id: nextId++, nombre, tipo, precio, imagen});
+      }
+      cargarItems();
+      document.getElementById('addForm').classList.add('hidden');
+    };
+    
+    window.editarItem = function(id){
+      const item = items.find(i => i.id === id);
+      if (!item) return;
+      editId = id;
+      document.getElementById('addForm').classList.remove('hidden');
+      document.getElementById('itemNombre').value = item.nombre;
+      document.getElementById('itemTipo').value = item.tipo;
+      document.getElementById('itemPrecio').value = item.precio;
+      document.getElementById('itemImagen').value = item.imagen || "";
+    };
+
+    window.eliminarItem = function(id){
+      if (!confirm("¿Seguro que deseas eliminar este vehículo?")) return;
+      items = items.filter(i => i.id !== id);
+      cargarItems();
+    };
+
+    // Initial load
+    mostrarLanding();
+  </script>
+</body>
+</html>
+
+<!--
+Understanding File Paths and Multimedia
+You asked about how to reference files, like images and videos, and what src="#" and src="..." mean. This is a crucial concept for any web project!
+
+1. What are src and file paths?
+The src (source) attribute in tags like <img>, <video>, and <iframe> tells the browser where to find the content to display. Think of it as an address.
+
+src="/": This is an absolute path that starts at the root of your website. For example, if your website is www.mywebsite.com, src="/images/photo.jpg" would look for www.mywebsite.com/images/photo.jpg.
+
+src="..." (or src="./" or src="../"): These are relative paths. They tell the browser to find the file relative to the current HTML file.
+
+src="images/photo.jpg": Looks for the images folder in the same directory as the HTML file.
+
+src="../images/photo.jpg": Moves one directory up, then looks for the images folder.
+
+src="#": This is an anchor link. It's used in <a> tags to link to an ID on the same page, not to a file. For example, <a href="#section2"> will jump to the element with id="section2".
+
+src="https://...": This is an absolute URL pointing to a file on another website. This is what you're using for your Unsplash images.
+
+2. Why file:///storage/emulated/0/... doesn't work for public sites
+The path file:///storage/emulated/0/... is a local file path on your device (like a phone or computer). When you open an HTML file directly from your phone's storage, the browser can access images from that path because it's on the same device.
+
+However, when you put your website on the internet, other people's browsers can't access your phone's internal storage for security and privacy reasons. To share your site with the public, you have two options:
+
+Upload the images: You must upload your image files (e.g., my-car.jpg) to the same server where your HTML file is hosted. The src attribute would then use a relative path like src="images/my-car.jpg".
+
+Use a public URL: Upload your images to a service like Google Photos, Imgur, or a hosting provider, and then use the direct link in your src attribute (e.g., src="https://www.example.com/my-car.jpg").
+
+3. How to add images in your admin panel
+In the crudPage section of your code, the input field for the image URL is perfect for this. When you add or edit an item, you can paste the URL of an image you've uploaded to a public service. For a private admin panel, you can use the local paths on your own computer, but remember that others won't see them.
+
+To make your admin panel personal and private, the code you have is already a great starting point. The simple if (user === "admin" && pass === "123") check in the JavaScript is a client-side authentication, which means it's not truly secure. For a real-world, truly private admin panel, you would need a backend server to handle the authentication and data storage. However, for a personal project where you are the only user, this is a perfectly valid and simple solution that works locally.
+
+
+
+
+
+
+Deep Research
+
+
+Gemini 

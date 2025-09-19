@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+										<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+										<title>
+																				DashBoard-
+																				
+										</title>
+</head>
+<body>
+										<h1>
+																				--Dashboard--
+										</h1>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuerdos Preciados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: sans-serif;
+            background-color: #f3f4f6;
+            scroll-behavior: smooth;
+        }
+        .scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+        .scroll-item {
+            scroll-snap-align: center;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+        .close-btn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+    <!-- Desktop: 3-column layout -->
+    <div class="hidden md:grid md:grid-cols-[280px_1fr_280px] h-full">
+        <aside class="w-full bg-gray-800 text-white p-6 shadow-lg overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú</h2>
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="#dashboard" class="text-blue-300 hover:text-blue-100">Dashboard</a></li>
+                    <li class="mb-2"><a href="#galeria" class="text-blue-300 hover:text-blue-100">Galería de Recuerdos</a></li>
+                    <li class="mb-2"><a href="#recuerdos" class="text-blue-300 hover:text-blue-100">Mis Recuerdos</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="w-full h-full p-8 overflow-y-auto">
+            <div id="dashboard" class="max-w-4xl mx-auto mb-12">
+                <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+                <p class="text-gray-700 leading-relaxed">Bienvenido a tu panel de control.</p>
+                <div class="mt-8 h-96 bg-white rounded-lg shadow-md p-6 flex items-center justify-center">
+                    <p class="text-gray-500 text-center">Aquí van los gráficos y datos.</p>
+                </div>
+            </div>
+
+            <div id="galeria" class="max-w-4xl mx-auto">
+                <h1 class="text-3xl font-bold mb-4">Recuerdos</h1>
+                <p class="text-gray-700 leading-relaxed mb-6">Un espacio dedicado a los momentos especiales.</p>
+                
+                <div id="gallery-container" class="relative w-full overflow-hidden rounded-lg shadow-lg bg-gray-100">
+                    <div id="gallery-track" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Media items will be dynamically inserted here -->
+                    </div>
+                    
+                    <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-200 focus:outline-none">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="nextBtn" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-200 focus:outline-none">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="recuerdos" class="max-w-4xl mx-auto mt-12">
+                <h2 class="text-3xl font-bold mb-4">Momentos para Recordar</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Aquí puedes escribir tus propios recuerdos y hacerlos más especiales con la ayuda de la inteligencia artificial.
+                </p>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <form id="memoryForm" class="space-y-4">
+                        <div>
+                            <label for="memoryTitle" class="block text-gray-700 font-semibold mb-2">Título del Recuerdo</label>
+                            <input type="text" id="memoryTitle" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Escribe un título memorable">
+                        </div>
+                        <div>
+                            <label for="memoryContent" class="block text-gray-700 font-semibold mb-2">Descripción del Recuerdo</label>
+                            <textarea id="memoryContent" rows="6" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Describe este momento especial..."></textarea>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button type="button" id="generateSummaryBtn" class="w-full sm:w-1/2 bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors duration-300">
+                                ✨ Crear un recuerdo inspirador
+                            </button>
+                            <button type="button" id="generatePoemBtn" class="w-full sm:w-1/2 bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors duration-300">
+                                ✨ Crea un poema para este recuerdo
+                            </button>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300">
+                            Guardar Recuerdo
+                        </button>
+                    </form>
+                    
+                    <div id="loading" class="hidden text-center text-gray-500 mt-4">
+                        Cargando...
+                    </div>
+                </div>
+                
+                <div id="memoriesList" class="mt-8 space-y-4">
+                    <!-- Lista de recuerdos guardados -->
+                </div>
+            </div>
+        </main>
+
+        <aside class="w-full bg-gray-200 p-6 shadow-lg overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú Derecho</h2>
+            <div class="bg-white rounded-lg p-4 shadow-md mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">El Valor del Programador</h3>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    El profesionalismo y la ética de un programador se basan en reglas, principios y normas que siempre hay que seguir.
+                </p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Mobile: 3-panel horizontal scroll layout -->
+    <div id="mobile-layout" class="md:hidden w-screen h-full flex flex-row flex-nowrap scroll-container">
+        <div id="left-aside" class="scroll-item w-[80vw] bg-gray-800 text-white p-6 flex-shrink-0">
+            <h2 class="text-xl font-bold mb-4">Menú</h2>
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="#" onclick="scrollToSection('main-content')" class="text-blue-300 hover:text-blue-100">Dashboard</a></li>
+                    <li class="mb-2"><a href="#" onclick="scrollToSection('galeria-mobile')" class="text-blue-300 hover:text-blue-100">Galería</a></li>
+                    <li class="mb-2"><a href="#" onclick="scrollToSection('recuerdos-mobile')" class="text-blue-300 hover:text-blue-100">Mis Recuerdos</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main id="main-content" class="scroll-item w-screen p-8 overflow-y-auto flex-shrink-0">
+            <div id="dashboard-mobile" class="mb-12">
+                <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+                <p class="text-gray-700 leading-relaxed">Bienvenido a tu panel de control.</p>
+                <div class="mt-8 h-96 bg-white rounded-lg shadow-md p-6 flex items-center justify-center">
+                    <p class="text-gray-500 text-center">Aquí van los gráficos.</p>
+                </div>
+            </div>
+            
+            <div id="galeria-mobile" class="max-w-4xl mx-auto">
+                <h1 class="text-3xl font-bold mb-4">Recuerdos</h1>
+                <p class="text-gray-700 leading-relaxed mb-6">Momentos especiales con ella.</p>
+                <div id="gallery-container-mobile" class="relative w-full overflow-hidden rounded-lg shadow-lg bg-gray-100">
+                    <div id="gallery-track-mobile" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Media items will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div id="right-aside" class="scroll-item w-[80vw] bg-gray-200 p-6 flex-shrink-0 overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú Derecho</h2>
+            <div class="bg-white rounded-lg p-4 shadow-md mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">El Valor del Programador</h3>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    El profesionalismo y la ética de un programador se basan en reglas, principios y normas que siempre hay que seguir.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Media files array, will be populated dynamically
+        const mediaFiles = [
+            { type: 'image', src: 'images/05_de_09_2025_foto1.jpg', alt: 'Mi Cumpleaños' },
+            { type: 'video', src: 'images/05_de_09_2025_video.mp4', alt: 'Mi Cumpleaños' },
+            { type: 'image', src: 'images/14_de_07_2025_foto1.jpg', alt: 'Cumpleaños de la abuelita' },
+            { type: 'image', src: 'images/14_de_07_2025_foto2.jpg', alt: 'Cumpleaños de la abuelita' },
+            { type: 'video', src: 'images/14_de_07_2025_video.mp4', alt: 'Cumpleaños de la abuelita' },
+        ];
+
+        function createGalleryItem(media) {
+            const item = document.createElement('div');
+            item.className = 'gallery-item flex-shrink-0 w-full p-6 text-center';
+            if (media.type === 'image') {
+                item.innerHTML = `<img src="${media.src}" alt="${media.alt}" class="w-full h-auto rounded-lg shadow-md">`;
+            } else if (media.type === 'video') {
+                item.innerHTML = `
+                    <div class="video-wrapper">
+                        <video controls class="w-full h-full rounded-lg shadow-md">
+                            <source src="${media.src}" type="video/mp4">
+                            Tu navegador no soporta el tag de video.
+                        </video>
+                    </div>`;
+            }
+            return item;
+        }
+
+        const galleryTrack = document.getElementById('gallery-track');
+        const galleryTrackMobile = document.getElementById('gallery-track-mobile');
+
+        mediaFiles.forEach(media => {
+            const desktopItem = createGalleryItem(media);
+            galleryTrack.appendChild(desktopItem);
+            const mobileItem = createGalleryItem(media);
+            mobileItem.className = 'gallery-item-mobile flex-shrink-0 w-full p-6 text-center';
+            galleryTrackMobile.appendChild(mobileItem);
+        });
+
+        // Gallery navigation logic
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentGalleryIndex = 0;
+        const totalItems = mediaFiles.length;
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentGalleryIndex = (currentGalleryIndex - 1 + totalItems) % totalItems;
+                updateGalleryPosition();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentGalleryIndex = (currentGalleryIndex + 1) % totalItems;
+                updateGalleryPosition();
+            });
+        }
+
+        function updateGalleryPosition() {
+            const itemWidth = galleryTrack.querySelector('.gallery-item').offsetWidth;
+            galleryTrack.style.transform = `translateX(${-currentGalleryIndex * itemWidth}px)`;
+            
+            const itemWidthMobile = galleryTrackMobile.querySelector('.gallery-item-mobile').offsetWidth;
+            galleryTrackMobile.style.transform = `translateX(${-currentGalleryIndex * itemWidthMobile}px)`;
+        }
+
+        // LLM integration for generating memory content
+        const generatePoemBtn = document.getElementById('generatePoemBtn');
+        const generateSummaryBtn = document.getElementById('generateSummaryBtn');
+        const memoryContent = document.getElementById('memoryContent');
+        const memoryTitle = document.getElementById('memoryTitle');
+        const loading = document.getElementById('loading');
+        
+        async function callGeminiApi(prompt) {
+            loading.classList.remove('hidden');
+            let result = '';
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: "Eres un asistente creativo y poético. Escribe textos cortos, inspiradores y emotivos sobre recuerdos y familia. Tu tono es cálido, personal y nostálgico. No añadas ningún texto extra, solo la respuesta principal." }] },
+            };
+
+            try {
+                let response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    throw new Error(`Error HTTP! estado: ${response.status}`);
+                }
+                const resJson = await response.json();
+                result = resJson.candidates?.[0]?.content?.parts?.[0]?.text || 'No se pudo generar el contenido. Intenta de nuevo.';
+            } catch (error) {
+                console.error('Error al llamar a la API de Gemini:', error);
+                result = 'Hubo un error al generar el contenido. Intenta de nuevo.';
+            } finally {
+                loading.classList.add('hidden');
+            }
+            return result;
+        }
+
+        generateSummaryBtn.addEventListener('click', async () => {
+            const prompt = `Escribe un recuerdo inspirador y conmovedor sobre: ${memoryTitle.value}.`;
+            const generatedText = await callGeminiApi(prompt);
+            memoryContent.value = generatedText;
+        });
+
+        generatePoemBtn.addEventListener('click', async () => {
+            const prompt = `Escribe un poema corto para la descripción: "${memoryContent.value}" con el título "${memoryTitle.value}".`;
+            const generatedText = await callGeminiApi(prompt);
+            memoryContent.value = generatedText;
+        });
+
+        // Add to the list
+        const memoriesList = document.getElementById('memoriesList');
+        const memoryForm = document.getElementById('memoryForm');
+
+        memoryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = memoryTitle.value;
+            const content = memoryContent.value;
+            if (!title || !content) return;
+
+            const newMemory = document.createElement('div');
+            newMemory.className = 'bg-white rounded-lg p-4 shadow-md';
+            newMemory.innerHTML = `
+                <h3 class="text-xl font-bold text-gray-800 mb-2">${title}</h3>
+                <p class="text-gray-700 leading-relaxed">${content}</p>
+            `;
+            memoriesList.prepend(newMemory);
+
+            memoryForm.reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home- Welcome-0s</title>
+<style>
+  /* ====== RESET Y BASE ====== */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; font-family: sans-serif; background: #f3f4f6; }
+
+  /* ====== LAYOUT DESKTOP ====== */
+  .layout {
+    display: grid;
+    grid-template-columns: 25% 1fr 25%;
+    height: 100vh;
+  }
+  aside, main {
+    overflow-y: auto;
+    padding: 10px;
+  }
+  aside { background: #e5e7eb; }
+  main { background: #fff; }
+
+  /* ====== NAVBAR SUPERIOR ====== */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 50px;
+    background: linear-gradient(90deg, skyblue, violet);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 1000;
+  }
+  .navbar h1 { font-size: 1.2rem; }
+  .navbar button {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  /* ====== MOBILE ====== */
+  @media (max-width: 768px) {
+    .layout {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr auto;
+    }
+    aside {
+      display: none; /* ocultar sidebars por defecto */
+    }
+    aside.active {
+      display: block;
+      position: fixed;
+      top: 50px;
+      bottom: 0;
+      width: 80%;
+      z-index: 999;
+    }
+    aside.left { left: 0; }
+    aside.right { right: 0; }
+  }
+
+  /* ====== IFRAMES ====== */
+  iframe {
+    width: 100%;
+    height: calc(100vh - 70px);
+    border: none;
+    background: white;
+  }
+ }} 
+  
+</style>
+   <style>
+    body { font-family: sans-serif; background: #f3f4f6; padding: 20px; }
+  .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; }
+  .card-media { flex: 1 1 auto; overflow: auto; }
+  .card-media img, .card-media video, .card-media iframe { width: 100%; height: auto; display: block; }
+  .card-content { padding: 10px; background: #fafafa; border-top: 1px solid #eee; }
+  textarea { width: 100%; height: 100px; margin-top: 10px; }
+  }
+</style> 
+  
+</head>
+<body>
+
+<!-- NAVBAR SUPERIOR -->
+<div class="navbar">
+  <button onclick="toggleSidebar('left')">☰</button>
+  <h1>Oz web </h1>
+  <button onclick="toggleSidebar('right')">☰</button>
+</div>
+
+<!-- LAYOUT PRINCIPAL -->
+  
+<div class="layout" style="padding-top:50px;">
+  <aside class="left">
+    <iframe src="generadorCodes.html"></iframe>
+  </aside>
+  <main>
+    <iframe src="VistasMultimedia.html"></iframe>
+  </main>
+  <aside class="right">
+  
+  <div class="card" style="padding-top:70px; padding: 10px, 10px, 10px;">
+    <h1> iframe Generador </h1>
+    <h2> img, video, audio, </h2>
+    
+    <div class="card">
+      <div>
+        
+  <!--
+<!DOCTYPE html>
+  
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Subir y Generar Todo</title>--
+<style>
+
+
+  <!--
+</head>
+  
+<body>
+-->
+        
+<h1>Subir y Generar Card + Snippet , code html> </h1>
+
+<input type="file" id="fileInput" multiple accept="image/*,video/*,audio/*,.pdf,.html">
+<div class="grid" id="mediaGrid"></div>
+				
+				<!--fin del 1 
+				
+				empieza 2
+				-->
+				<div style="width:100%; margin:1em 0;">
+  <img src="file:///8935f04c-8c86-43e2-83ef-ac404defe902" alt="iso,shared,transfers,2018_6,5032fb7df059e8a5feb985126e7a61fca5b4ffcc.jpg" style="width:100%;">
+</div>
+      </div>
+    </div>
+  </div>
+    
+        <!--
+    <iframe src="#"></iframe>
+				-->
+      
+      
+    
+    <!--
+  </aside>
+</div>
+
+ --> 
+  
+<script>
+  // Lógica para mostrar/ocultar sidebars en móvil
+  function toggleSidebar(side) {
+    const aside = document.querySelector(`aside.${side}`);
+    aside.classList.toggle('active');
+  }
+
+  // Centrar contenido aunque haya zoom
+  window.addEventListener('resize', centerLayout);
+  window.addEventListener('load', centerLayout);
+  function centerLayout() {
+    document.body.style.display = 'flex';
+    document.body.style.justifyContent = 'center';
+  }
+</script>
+  
+
+				<!--
+				empieza el 1er script GENERADOR DE CONTENIDO
+				-->
+
+<script>
+const inputEl = document.getElementById('fileInput');
+const gridEl  = document.getElementById('mediaGrid');
+
+const IMG_EXT = ['jpg','jpeg','png','gif','webp'];
+const VID_EXT = ['mp4','webm','ogg'];
+const AUD_EXT = ['mp3','wav','aac'];
+const IFR_EXT = ['pdf','html','htm'];
+
+inputEl.addEventListener('change', () => {
+  gridEl.innerHTML = '';
+  Array.from(inputEl.files).forEach(file => {
+    const url  = URL.createObjectURL(file);
+    const ext  = file.name.split('.').pop().toLowerCase();
+    const elem = getMediaElement(ext, url, file.name);
+    const snippet = generateSnippet(url, file.name, ext);
+    const card = createCard(file.name, ext, elem, snippet);
+    gridEl.appendChild(card);
+  });
+});
+
+function getMediaElement(ext, src, name) {
+  if (IMG_EXT.includes(ext)) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = name;
+    return img;
+  }
+  if (VID_EXT.includes(ext)) {
+    const video = document.createElement('video');
+    video.controls = true;
+    video.src = src;
+    return video;
+  }
+  if (AUD_EXT.includes(ext)) {
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.src = src;
+    return audio;
+  }
+  if (IFR_EXT.includes(ext)) {
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    return iframe;
+  }
+  const link = document.createElement('a');
+  link.href = src;
+  link.target = '_blank';
+  link.textContent = 'Abrir ' + name;
+  return link;
+}
+
+function generateSnippet(path, name, ext) {
+  let tag;
+  if (IMG_EXT.includes(ext)) {
+    tag = `<img src="${path}" alt="${name}" style="width:100%;">`;
+  } else if (VID_EXT.includes(ext)) {
+    tag = `<video controls src="${path}" style="width:100%;"></video>`;
+  } else if (AUD_EXT.includes(ext)) {
+    tag = `<audio controls src="${path}" style="width:100%;"></audio>`;
+  } else if (IFR_EXT.includes(ext)) {
+    tag = `<iframe src="${path}" style="width:100%; height:200px; border:none;"></iframe>`;
+  } else {
+    tag = `<a href="${path}" target="_blank" style="display:inline-block; width:100%;">Descarga ${name}</a>`;
+  }
+  return `<div style="width:100%; margin:1em 0;">\n  ${tag}\n</div>`;
+}
+
+function createCard(name, ext, mediaEl, snippet) {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const mediaWrapper = document.createElement('div');
+  mediaWrapper.className = 'card-media';
+  mediaWrapper.appendChild(mediaEl);
+
+  const info = document.createElement('div');
+  info.className = 'card-content';
+  info.innerHTML = `<p><strong>${name}</strong> (${ext})</p>`;
+
+  const textarea = document.createElement('textarea');
+  textarea.readOnly = true;
+  textarea.value = snippet;
+
+  info.appendChild(textarea);
+  card.appendChild(mediaWrapper);
+  card.appendChild(info);
+  return card;
+}
+    
+    
+    
+    //SCRIPT ONLINE 
+    
+</script>
+    <script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+    iFrame.width  = iFrame.contentWindow.document.body.scrollWidth;
+    iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'iFrame1' );
+    resizeIFrameToFitContent( iFrame );
+
+    // or, to resize all iframes:
+    var iframes = document.querySelectorAll("iframe");
+    for( var i = 0; i < iframes.length; i++) {
+        resizeIFrameToFitContent( iframes[i] );
+    }
+} );
+
+</script>
+
+<iframe src="usagelogs/default.aspx" id="iFrame1"></iframe>
+    <!--Share
+Improve this answer
+-->
+
+</body>
+</html>

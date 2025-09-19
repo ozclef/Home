@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+				<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+				<title>files</title>
+</head>
+<body>
+				<h1>
+								gestor archivos
+				</h1>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Archivos Locales</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f3f4f6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .file-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .file-item img, .file-item video {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Mi Panel de Archivos</h1>
+        <div id="file-list">
+            </div>
+    </div>
+				
+				
+				<!--
+				
+				<input type="file" id="fileInput" multiple>
+<div id="mediaGrid"></div>
+
+<script>
+const inputEl = document.getElementById('fileInput');
+const gridEl  = document.getElementById('mediaGrid');
+
+const IMG_EXT = ['jpg','jpeg','png','gif','webp'];
+const VID_EXT = ['mp4','webm','ogg'];
+const AUD_EXT = ['mp3','wav','aac'];
+const IFR_EXT = ['pdf','html','htm'];
+
+inputEl.addEventListener('change', () => {
+  gridEl.innerHTML = '';
+  Array.from(inputEl.files)
+    .sort((a,b) => a.lastModified - b.lastModified) // ordena por fecha más antigua
+    .forEach(file => {
+      const localURL = URL.createObjectURL(file);
+      const repoURL  = "/" + file.name; // ruta para GitHub Pages
+      const ext      = file.name.split('.').pop().toLowerCase();
+      const fechaMod = new Date(file.lastModified).toLocaleString();
+      const fechaNom = (file.name.match(/\d{4}/) || [])[0] || "Sin fecha en nombre";
+
+      const elem     = getMediaElement(ext, localURL, file.name);
+      const snippet  = generateSnippet(repoURL, file.name, ext);
+      const card     = createCard(file.name, ext, elem, snippet, fechaMod, fechaNom);
+      gridEl.appendChild(card);
+    });
+});
+
+function getMediaElement(ext, src, name) {
+  if (IMG_EXT.includes(ext)) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = name;
+    return img;
+  }
+  if (VID_EXT.includes(ext)) {
+    const video = document.createElement('video');
+    video.controls = true;
+    video.src = src;
+    return video;
+  }
+  if (AUD_EXT.includes(ext)) {
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.src = src;
+    return audio;
+  }
+  if (IFR_EXT.includes(ext)) {
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    return iframe;
+  }
+  const link = document.createElement('a');
+  link.href = src;
+  link.target = '_blank';
+  link.textContent = 'Abrir ' + name;
+  return link;
+}
+
+function generateSnippet(path, name, ext) {
+  let tag;
+  if (IMG_EXT.includes(ext)) {
+    tag = `<img src="${path}" alt="${name}" style="width:100%;">`;
+  } else if (VID_EXT.includes(ext)) {
+    tag = `<video controls src="${path}" style="width:100%;"></video>`;
+  } else if (AUD_EXT.includes(ext)) {
+    tag = `<audio controls src="${path}" style="width:100%;"></audio>`;
+  } else if (IFR_EXT.includes(ext)) {
+    tag = `<iframe src="${path}" style="width:100%; height:200px; border:none;"></iframe>`;
+  } else {
+    tag = `<a href="${path}" target="_blank" style="display:inline-block; width:100%;">Descarga ${name}</a>`;
+  }
+  return `<div style="width:100%; margin:1em 0;">\n  ${tag}\n</div>`;
+}
+
+function createCard(name, ext, mediaEl, snippet, fechaMod, fechaNom) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style = "background:#fff; padding:10px; margin:10px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);";
+
+  const mediaWrapper = document.createElement('div');
+  mediaWrapper.appendChild(mediaEl);
+
+  const info = document.createElement('div');
+  info.innerHTML = `
+    <p><strong>${name}</strong> (${ext})</p>
+    <p>📅 Fecha (nombre): ${fechaNom}</p>
+    <p>🕒 Última modif.: ${fechaMod}</p>
+    <textarea readonly style="width:100%; height:80px;">${snippet}</textarea>
+  `;
+
+  card.appendChild(mediaWrapper);
+  card.appendChild(info);
+  return card;
+}
+</script>
+-->
+				
+<div style="width:100%; margin:1em 0;">
+				
+				<h3>
+								Primer imagen 
+				</h3>
+  <img src="blob:file:///565df69a-d8a0-42eb-8753-bae53915623d" alt="iso,shared,transfers,2018_24,937a5e0d5920d8a48ff073c0e5802ea8afb0a073.jpg" style="width:100%;">
+</div>
+				
+				
+				
+    <script>
+        // Aquí defines tus archivos manualmente.
+        // La ruta `file:///storage/emulated/0/...` es para tu teléfono.
+        const files = [
+            {
+                name: "Carpeta de Fotos de Vacaciones",
+                type: "folder",
+                content: [
+                    { name: "Playa.jpg", type: "image", path: "file:///storage/emulated/0/DCIM/Camera/Playa.jpg" },
+                    { name: "Montaña.mp4", type: "video", path: "file:///storage/emulated/0/Movies/Montaña.mp4" }
+                ]
+            },
+            {
+                name: "Documentos Importantes",
+                type: "folder",
+                content: [
+                    { name: "Contrato.pdf", type: "document", path: "file:///storage/emulated/0/Documents/Contrato.pdf" }
+                ]
+            },
+            {
+                name: "Mi Música Favorita",
+                type: "folder",
+                content: [
+                    { name: "Cancion.mp3", type: "audio", path: "file:///storage/emulated/0/Music/Cancion.mp3" }
+                ]
+            }
+        ];
+
+        const fileListContainer = document.getElementById('file-list');
+
+        function renderFiles() {
+            fileListContainer.innerHTML = '';
+            files.forEach(folder => {
+                const folderCard = document.createElement('div');
+                folderCard.className = 'card';
+                folderCard.innerHTML = `
+                    <h3>${folder.name}</h3>
+                    <div class="folder-content"></div>
+                `;
+                
+                const folderContent = folderCard.querySelector('.folder-content');
+                folder.content.forEach(file => {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+                    
+                    let fileHTML = `
+                        <p><strong>Nombre:</strong> ${file.name}</p>
+                        <p><strong>Tipo:</strong> ${file.type}</p>
+                    `;
+
+                    if (file.type === 'image') {
+                        fileHTML += `<img src="${file.path}" alt="${file.name}">`;
+                    } else if (file.type === 'video') {
+                        fileHTML += `<video controls><source src="${file.path}" type="video/mp4"></video>`;
+                    } else if (file.type === 'audio') {
+                        fileHTML += `<audio controls><source src="${file.path}" type="audio/mpeg"></audio>`;
+                    } else {
+                        fileHTML += `<a href="${file.path}" target="_blank">Abrir documento</a>`;
+                    }
+
+                    fileItem.innerHTML = fileHTML;
+                    folderContent.appendChild(fileItem);
+                });
+                
+                fileListContainer.appendChild(folderCard);
+            });
+        }
+
+        // Llama a la función para mostrar los archivos cuando la página cargue
+        document.addEventListener('DOMContentLoaded', renderFiles);
+    </script>
+</body>
+</html>

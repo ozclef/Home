@@ -28,6 +28,9 @@
 
   /* ====== LAYOUT DESKTOP ====== */
   .layout {
+  	
+    border: solid black;
+   border-radius: 4px;
     display: grid;
     grid-template-columns: 25% 1.5fr 25%;
     height: 100%;
@@ -36,7 +39,9 @@
     overflow-y: auto;
     padding: 10px;
   }
-  aside { background: gray; }
+  aside { background: gray; 
+    border: solid black;
+   border-radius: 4px;}
   main { background: white; min-width:90% }
 
   
@@ -53,15 +58,17 @@
     justify-content: space-between;
     padding: 0 15px;
     z-index: 1000;
+    border: solid black;
   }
   .navbar h1 { font-size: 1.2rem; }
-  .navbar button {
-    background: rgba(255,255,255,0.2);
-    border: none;
+  .navbar button , .navbar a {
+    /*background: rgba(255,255,255,0.2);*/
+    border: solid black;
+   border-radius: 4px;
     padding: 5px 10px;
-    color: white;
+    color: black;
     cursor: pointer;
-    border-radius: 4px;
+   
   }
 
   /* ====== MOBILE ====== */
@@ -69,8 +76,14 @@
     .layout {
       grid-template-columns: 1.1fr;
       grid-template-rows: auto 1.5fr auto;
+      
+    border: solid black;
+   border-radius: 4px;
     }
     aside {
+    	
+    border: solid black;
+   border-radius: 4px;
       display: none; /* ocultar sidebars por defecto */
     }
     aside.active {
@@ -91,7 +104,11 @@
     height: calc(100vh - 70px);
     border: none;
     background: white;
+    
+    border: solid black;
+   border-radius: 4px;
   }
+  
 </style>
 </head>
 <body>
@@ -99,7 +116,7 @@
 <!-- NAVBAR SUPERIOR -->
 <div class="navbar">
   <button onclick="toggleSidebar('left')">☰</button>
-  <h1><a href="index.html">INICIO-Pag. Principal</a> /h1>
+
   <a href="index.html">INICIO-Pag. Principal</a>
   <button onclick="toggleSidebar('right')">☰</button>
 </div>
@@ -117,17 +134,23 @@
 
     
     <br>
-<a href="ia/archivos/index.html"> MI IA..</a>
+<!--<a href="ia/archivos/index.html"> MI IA..</a>
     <iframe src="ia/archivos/index.html"></iframe>
     <iframe src="left-main.html"></iframe>
-
+-->
   </aside>
 <!--
 -->
   <main>
+
+  	<h2> TETIS LUNA--
+	<iframe width="1107" height="634" src="https://www.youtube.com/embed/7KpDhgcdWUY" title="Lo que Cassini descubrió en Tetis sorprendió a los científicos | Lunas del Sistema Solar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <h2>This is mine...</h2>
     <h5>my sure place</h5>
         <div class="card">
+        	
+        	
+        	
       <h3>OS/Media/Takes:/</h3>
           <iframe width="70%" height="240px" src="https://www.youtube.com/embed/e8asUl9l8kY" title="Batman Azteca: Resumen y opinión - The Top Comics" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
          </div>
@@ -138,6 +161,17 @@
   
   </main>
   <aside class="right">
+  	
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NKNCh4mWwvs?si=QqmTTODF64F5jidX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  	
+<iframe width="400" height="225" src="https://www.youtube.com/embed/ViJ2onuZTD0" title="7RU7H &amp; Promoting Sounds - Save Me" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+  	<iframe width="324" height="324" src="https://www.youtube.com/embed/r_lrWrox_VQ" title="I Promise – 2KBABY (Official Audio) | 2 Lost Album 2025" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="324" height="324" src="https://www.youtube.com/embed/xEC0vCytQKY" title="Back Against The Wall – 2KBABY (Official Audio) | 2 Lost" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  	
     <iframe width="100%" height="59" src="https://www.youtube.com/embed/L1CRfMZVZC4?list=RDkH0ki5y5g8c" title="iann dior - gone girl ft. Trippie Redd (Official Audio)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <iframe width="100%" height="144px" src="https://www.youtube.com/embed/QsE3pfju48I?list=RDkP6_nlTdPgI" title="Pathetica" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <iframe width="100%" height="144px" src="https://www.youtube.com/embed/MCsXfF6VBpo?list=RDGMEMJQXQAmqrnmK1SEjY_rKBGA" title="Crash" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

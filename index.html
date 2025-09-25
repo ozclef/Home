@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My-Home-0s</title>
+<style>
+  /* ====== RESET Y BASE ====== */
+  * { box-sizing: border-box; margin: 5px; padding: 05px; }
+  html, body { height: 100%; font-family: sans-serif; background: #f3f4f6; }
+
+  /* ====== LAYOUT DESKTOP ====== */
+  /*
+  .layout {
+    display: grid;
+    grid-template-columns: 25% 0.9fr 25%;
+    height: 90vh;
+  }
+  aside, main {
+    overflow-y: auto;
+    padding: 10px;
+  }
+  aside { background: skyblue; }
+  main { background: white; }
+  { box-sizing: border-box; margin: 0; padding: 0; }
+*/
+  html, body { height: 100%; font-family: sans-serif; background: linear-gradient(#f3f4f6 30%, black 50%); }
+
+  /* ====== LAYOUT DESKTOP ====== */
+  .layout {
+    display: grid;
+    grid-template-columns: 25% 1.5fr 25%;
+    height: 100%;
+  }
+  aside, main {
+    overflow-y: auto;
+    padding: 10px;
+  }
+  aside { background: gray; }
+  main { background: white; min-width:90% }
+
+  
+  /* ====== NAVBAR SUPERIOR ====== */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 8vh;
+    /*background: linear-gradient(90deg, skyblue, #F0F);*/
+    background: linear-gradient(90deg, skyblue, blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 1000;
+  }
+  .navbar h1 { font-size: 1.2rem; }
+  .navbar button {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  /* ====== MOBILE ====== */
+  @media (max-width: 768px) {
+    .layout {
+      grid-template-columns: 1.1fr;
+      grid-template-rows: auto 1.5fr auto;
+    }
+    aside {
+      display: none; /* ocultar sidebars por defecto */
+    }
+    aside.active {
+      display: block;
+      position: fixed;
+      top: 8vh;
+      bottom: 0;
+      width: 90%;
+      z-index: 999;
+    }
+    aside.left { left: 0; }
+    aside.right { right: 0; }
+  }
+
+  /* ====== IFRAMES ====== */
+  iframe {
+    width: 100%;
+    height: calc(100vh - 70px);
+    border: none;
+    background: white;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR SUPERIOR -->
+<div class="navbar">
+  <button onclick="toggleSidebar('left')">☰</button>
+  <h1><a href="index.html">INICIO-Pag. Principal</a> /h1>
+  <a href="index.html">INICIO-Pag. Principal</a>
+  <button onclick="toggleSidebar('right')">☰</button>
+</div>
+
+
+<!-- LAYOUT PRINCIPAL -->
+<div class="layout" style="padding-top:60px;">
+  <aside class="left">
+    --NAVEGADOR<br>
+    <a href="index.html">INICIO-Pag. Principal</a>    <br>
+<a href="BreakingNewsOs.html">Breaking NewOs</a><br>
+<a href="Main.html">Main </a><br>
+<a href="PanelMedia.html">Gen Media </a><br>
+<a href="right-cards.html"> </a><br>
+
+    
+    <br>
+<a href="ia/archivos/index.html"> MI IA..</a>
+    <iframe src="ia/archivos/index.html"></iframe>
+    <iframe src="left-main.html"></iframe>
+
+  </aside>
+<!--
+-->
+  <main>
+    <h2>This is mine...</h2>
+    <h5>my sure place</h5>
+        <div class="card">
+      <h3>OS/Media/Takes:/</h3>
+          <iframe width="70%" height="240px" src="https://www.youtube.com/embed/e8asUl9l8kY" title="Batman Azteca: Resumen y opinión - The Top Comics" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+         </div>
+
+    <h3>Ciencia y musica</h3>
+    <a href=""> this-...</a>
+  <iframe src="https://ozclef.github.io/home/Pages.html/ciencia.html"></iframe>
+  
+  </main>
+  <aside class="right">
+    <iframe width="100%" height="59" src="https://www.youtube.com/embed/L1CRfMZVZC4?list=RDkH0ki5y5g8c" title="iann dior - gone girl ft. Trippie Redd (Official Audio)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="100%" height="144px" src="https://www.youtube.com/embed/QsE3pfju48I?list=RDkP6_nlTdPgI" title="Pathetica" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="100%" height="144px" src="https://www.youtube.com/embed/MCsXfF6VBpo?list=RDGMEMJQXQAmqrnmK1SEjY_rKBGA" title="Crash" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+   
+  </aside>
+</div>
+
+<script>
+  // Lógica para mostrar/ocultar sidebars en móvil
+  function toggleSidebar(side) {
+    const aside = document.querySelector(`aside.${side}`);
+    aside.classList.toggle('active');
+  }
+
+  // Centrar contenido aunque haya zoom
+  window.addEventListener('resize', centerLayout);
+  window.addEventListener('load', centerLayout);
+  function centerLayout() {
+    document.body.style.display = 'flex';
+    document.body.style.justifyContent = 'center';
+  }
+</script>
+
+</body>
+</html>
+
+<!----
+

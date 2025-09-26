@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Repositorios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Si quieres usar Bootstrap, descomenta la siguiente línea -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <!-- Si quieres usar Tailwind, descomenta la siguiente línea -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+  <style>
+    body { margin:0; font-family: 'Segoe UI', Arial, sans-serif; background: #f3f5fa; }
+    .sidebar {
+      width: 320px; background: #212a3e; color: #fff; height: 100vh; padding: 0 0 20px 0; position: fixed; left:0; top:0; box-shadow: 2px 0 12px #0001;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .avatar {
+      margin: 30px 0 10px 0; width: 100px; height: 100px; border-radius: 50%; border: 4px solid #3d4973; box-shadow: 0 2px 10px #0002;
+      background: #fff;
+    }
+    .username { font-size: 1.2em; font-weight: bold; margin-bottom: 15px; }
+    .search-box {
+      width: 90%; margin-bottom: 20px;
+    }
+    .search-box input {
+      width: 100%; padding: 10px; border-radius: 6px; border: none; font-size: 1em;
+      box-shadow: 0 1px 5px #0001;
+    }
+    .repo-list { width: 90%; flex: 1; overflow-y: auto; margin: 0; padding: 0; }
+    .repo-list li {
+      background: #25304b; margin: 8px 0; border-radius: 7px; padding: 10px;
+      display: flex; flex-direction: column;
+      transition: background 0.2s;
+    }
+    .repo-list li:hover { background: #2a3654; }
+    .repo-title { color: #7eb6ff; font-weight: bold; font-size: 1em; text-decoration: none; }
+    .repo-links { margin-top: 3px; }
+    .repo-link {
+      color: #c9e4ff; font-size: 0.95em; text-decoration: none; margin-right: 10px;
+      transition: color 0.2s;
+    }
+    .repo-link:hover { color: #fff; }
+    .main-content {
+      margin-left: 320px; min-height: 100vh; background: #f3f5fa; padding: 0;
+      display: flex; flex-direction: column;
+    }
+    .topbar {
+      height: 60px; background: #1b2232; color: #fff; display: flex; align-items: center; padding: 0 30px; font-size: 1.25em; font-weight: 500;
+      border-bottom: 1px solid #222c44;
+      letter-spacing: 1px;
+    }
+    iframe {
+      flex: 1; border: none; width: 100%; min-height: 80vh; background: #fff;
+    }
+    @media (max-width: 900px) {
+      .sidebar { position: static; width: 100vw; height: auto; flex-direction: row; flex-wrap: wrap; }
+      .main-content { margin-left: 0; }
+    }
+    /* Simple scrollbar */
+    .repo-list { scrollbar-color: #4c77b7 #25304b; scrollbar-width: thin; }
+    .repo-list::-webkit-scrollbar { width: 7px; background: #25304b; }
+    .repo-list::-webkit-scrollbar-thumb { background: #4c77b7; border-radius: 7px; }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <!-- Cambia el src por el tuyo o usa el avatar de GitHub automáticamente -->
+  <img id="avatar" class="avatar" src="" alt="avatar">
+  <div class="username" id="username">@ozclef</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Buscar repositorio...">
+  </div>
+  <ul class="repo-list" id="repoList"></ul>
+</div>
+<div class="main-content">
+  <div class="topbar">
+    <span>Inventario de Repositorios</span>
+  </div>
+  <iframe id="viewer" src="" title="Vista previa"></iframe>
+</div>
+<script>
+  // Datos de tus repos, puedes expandir o automatizar con la API de GitHub
+  const username = "ozclef";
+  document.getElementById('avatar').src = `https://github.com/${username}.png`;
+
+  const repos = [
+    {
+      name: "capitan-spalding/amazing-people",
+      github: "https://github.com/capitan-spalding/amazing-people",
+      page: "",
+      desc: "Página oficial de amazing people."
+    },
+    {
+      name: "ozclef/before-home",
+      github: "https://github.com/ozclef/before-home",
+      page: "",
+      desc: "Sitio personal ready."
+    },
+    {
+      name: "os-clef/amazing-people",
+      github: "https://github.com/os-clef/amazing-people",
+      page: "",
+      desc: "Otra versión de amazing people."
+    },
+    {
+      name: "Wuana-Wuary/web",
+      github: "https://github.com/Wuana-Wuary/web",
+      page: "https://wuana-wuary.github.io/web/",
+      desc: "Web principal Wuana-Wuary OFICIAL."
+    },
+    {
+      name: "os-clef/home",
+      github: "https://github.com/os-clef/home",
+      page: "https://ozclef.github.io/home/",
+      desc: "Home principal Main Html"
+    },
+    {
+      name: "ozclef/home",
+      github: "https://github.com/ozclef/home",
+      page: "https://ozclef.github.io/home/",
+      desc: "It'z the best version of me... and the worst will better"
+    }
+  ];
+
+  const repoList = document.getElementById("repoList");
+  const viewer = document.getElementById("viewer");
+  const search = document.getElementById("search");
+
+  // Renderiza la lista
+  function renderList(filter="") {
+    repoList.innerHTML = "";
+    const filtered = repos.filter(r =>
+      r.name.toLowerCase().includes(filter) ||
+      r.desc.toLowerCase().includes(filter)
+    );
+    if(filtered.length === 0) {
+      repoList.innerHTML = `<li style="text-align:center;color:#aaa;">No se encontró nada</li>`;
+      return;
+    }
+    filtered.forEach(r => {
+      const li = document.createElement("li");
+      const title = document.createElement("a");
+      title.href = r.github;
+      title.textContent = r.name;
+      title.target = "_blank";
+      title.className = "repo-title";
+      li.appendChild(title);
+      if(r.desc){
+        const d = document.createElement("div");
+        d.style = "color:#afcfff;font-size:0.93em;margin-top:2px;";
+        d.textContent = r.desc;
+        li.appendChild(d);
+      }
+      const links = document.createElement("div");
+      links.className = "repo-links";
+      // GitHub link
+      const l1 = document.createElement("a");
+      l1.href = r.github;
+      l1.target = "_blank";
+      l1.textContent = "GitHub";
+      l1.className = "repo-link";
+      links.appendChild(l1);
+      // Página link
+      if (r.page) {
+        const l2 = document.createElement("a");
+        l2.href = "#";
+        l2.textContent = "🌐 página";
+        l2.className = "repo-link";
+        l2.onclick = function(e) {
+          e.preventDefault();
+          viewer.src = r.page;
+          window.scrollTo(0,0);
+        };
+        links.appendChild(l2);
+      }
+      li.appendChild(links);
+      repoList.appendChild(li);
+    });
+  }
+  renderList();
+
+  // Buscador
+  search.addEventListener("input", function() {
+    renderList(this.value.toLowerCase());
+  });
+
+  // Cargar primero por defecto
+  if(repos[0].page) viewer.src = repos[0].page;
+</script>
+</body>
+</html>

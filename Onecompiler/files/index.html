@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi OS Web</title>
+  <link rel="stylesheet" href="OS.css">
+  <script defer src="OS.js"></script>
+</head>
+<body>
+  <!-- Ventana principal: Menú de inicio -->
+  <div id="menu-principal" class="ventana grande" style="display:block;">
+    <div class="topbar">
+      <span>🌟 Menú Principal</span>
+      <button class="cerrar" onclick="cerrar('menu-principal')">✖</button>
+    </div>
+    <div class="contenido">
+      <h2>Aplicaciones del Sistema</h2>
+      <div class="apps-lista">
+        <button onclick="abrir('browser')"><img src="icon-browser.png" alt="🌐"> Navegador</button>
+        <button onclick="abrir('archivos')"><img src="icon-files.png" alt="📁"> Archivos</button>
+        <button onclick="abrir('config')"><img src="icon-settings.png" alt="⚙️"> Configuración</button>
+        <!-- Puedes agregar más botones aquí -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Ventana: Navegador -->
+  <div id="browser" class="ventana">
+    <div class="topbar" onmousedown="arrastrarVentana(event, 'browser')">
+      <span>🌐 Navegador Web</span>
+      <button class="cerrar" onclick="cerrar('browser')">✖</button>
+    </div>
+    <div class="contenido">
+      <input id="url-browser" type="text" placeholder="Escribe una URL y pulsa Enter" onkeypress="if(event.key==='Enter'){ cargarSitio() }">
+      <button onclick="cargarSitio()">Ir</button>
+      <iframe id="visor-browser"></iframe>
+    </div>
+  </div>
+
+  <!-- Ventana: Archivos -->
+  <div id="archivos" class="ventana">
+    <div class="topbar" onmousedown="arrastrarVentana(event, 'archivos')">
+      <span>📁 Archivos</span>
+      <button class="cerrar" onclick="cerrar('archivos')">✖</button>
+    </div>
+    <div class="contenido">
+      <p>Lector de archivos simple en desarrollo...</p>
+    </div>
+  </div>
+
+  <!-- Ventana: Configuración -->
+  <div id="config" class="ventana">
+    <div class="topbar" onmousedown="arrastrarVentana(event, 'config')">
+      <span>⚙️ Configuración</span>
+      <button class="cerrar" onclick="cerrar('config')">✖</button>
+    </div>
+    <div class="contenido">
+      <p>Página de configuración del sistema.</p>
+      
+      
+        <div >
+    <button onclick="abrir('menu-principal')">🪟 Inicio</button>
+    <button onclick="abrir('browser')">🌐 Navegador</button>
+    <button onclick="abrir('archivos')">📁 Archivos</button>
+    <button onclick="abrir('config')">⚙️ Configuración</button>
+  </div>
+      
+      
+    </div>
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="barra-inferior">
+    <button onclick="abrir('menu-principal')">🪟 Inicio</button>
+    <button onclick="abrir('browser')">🌐 Navegador</button>
+    <button onclick="abrir('archivos')">📁 Archivos</button>
+    <button onclick="abrir('config')">⚙️ Configuración</button>
+  </div>
+</body>
+</html>

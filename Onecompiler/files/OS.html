@@ -1,0 +1,1376 @@
+
+  
+  
+  
+  <!DOCTYPE html>
+
+  
+  <meta charset="UTF-8">
+  <title>0z System Operative </title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operative System US</title>
+  <link rel="stylesheet" href="OS.css">
+  <script defer src="OS.js"></script>
+  
+  
+  
+  
+  <!--HEAD STARS -->
+  
+  
+  
+  <head>
+  
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #1e1e1e;
+      color: white;
+      
+      body {
+  background-image: url( https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-2e1c-61f7-91a5-6d120648b0fe/raw?se=2025-06-24T13%3A50%3A08Z&sp=r&sv=2024-08-04&sr=b&scid=1a832529-6e0b-548c-80b6-b23dd6db4531&skoid=a3412ad4-1a13-47ce-91a5-c07730964f35&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-24T11%3A34%3A16Z&ske=2025-06-25T11%3A34%3A16Z&sks=b&skv=2024-08-04&sig=t5I7U7NIFypXdBWu8acx4LAu8wLMvAeO4eLKHMQnxEA%3D);
+  background-size: cover;
+  background-position: center;
+}
+      
+    }
+
+    /* Barra inferior */
+    .barra-inferior {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #333;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      z-index: 1000;
+    }
+
+    .barra-inferior button {
+      background: #444;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Ventanas */
+    .ventana {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 300px;
+      height: 200px;
+      background-color: #2c2c2c;
+      border: 2px solid #555;
+      padding: 10px;
+      z-index: 999;
+    }
+
+    .ventana h3 {
+      margin-top: 0;
+    }
+
+    .cerrar {
+      float: right;
+      cursor: pointer;
+      color: red;
+    }
+    
+
+
+
+.ventana-draggable {
+  width: 500px;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  border: 2px solid #1abc9c;
+  background-color: #ecf0f1;
+  z-index: 2000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.barra-movible {
+  background-color: #16a085;
+  color: white;
+  cursor: move;
+  padding: 10px;
+  font-weight: bold;
+}
+  
+
+
+<style xwindow>
+  .window{
+  width: 600px;
+  height: 400px;
+  min-width: 300px;
+  min-height: 200px;
+  position: absolute;
+
+  .resizer{
+    position: absolute;
+    z-index: 1;
+    width: 22px;
+    height: 22px;
+    background: #41a94c80; //delete
+    &.corner{
+      z-index: 2;
+      &.tl{ cursor: nw-resize; top: -5px; left: -5px; }
+      &.tr{ cursor: ne-resize; top: -5px; right: -5px; }
+      &.bl{ cursor: sw-resize; bottom: -5px; left: -5px; }
+      &.br{ cursor: se-resize; bottom: -5px; right: -5px; }
+    }
+    &.t, &.b{
+      width: 100%;
+      height: 14px;
+    }
+    &.l, &.r{
+      width: 14px;
+      height: 100%;
+    }
+    &.t{ cursor: n-resize; top: -5px; }
+    &.b{ cursor: s-resize; bottom: -5px; }
+    &.l{ cursor: w-resize; left: -5px; }
+    &.r{ cursor: e-resize; right: -5px; }
+  }
+
+  .body{
+    border-radius: 15px;
+    overflow: hidden;
+    height: 100%;
+    background: #f4f4f4;
+    .topbar{
+      width: 100%;
+      height: 60px;
+      background: #8c8c8c;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      .btns{
+        display: flex;
+        gap: 9px;
+        div{
+          height: 14px;
+          width: 14px;
+          border-radius: 50%;
+          &:nth-child(1){ background:#FF5F58; }
+          &:nth-child(2){ background:#FFBE2F; }
+          &:nth-child(3){ background:#2AC940; }
+        }
+      }
+    }
+  }
+
+</style>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</head>
+  
+  
+  
+  
+  <!--  
+  
+  -----------------------------------------------------------------------------------
+  
+  --------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------------------
+  
+  -->
+  
+
+
+<body>
+
+<body oncontextmenu="return false"; >
+  
+  
+  
+<div id="menuContextual">
+ <button onclick="cerrarVentana()">❌ Cerrar ventana</button>
+    <button onclick="alert('Opción 2')">⚙ OOpcion</button>
+  </div>
+
+  <div id="ventana" style="margin:40px;padding:20px;border:2px solid white;">
+    <h3>Mi Ventana</h3>
+    <p>Haz clic derecho sobre esta área.</p>
+  </div>
+  
+  
+  
+ <script>
+const menu = document.getElementById("menuContextual");
+    const ventana = document.getElementById("ventana");
+
+    Ventana.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+      menu.style.top = e.pageY + "px";
+      menu.style.left = e.pageX + "px";
+      menu.style.display = "block";
+    });
+
+    document.addEventListener("click", function () {
+      menu.style.display = "none";
+    });
+
+    function cerrarVentana() {
+      ventana.style.display = "none";
+    }
+  </script>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+<script>
+  function minimizarVentana() {
+    const contenido = document.getElementById("contenidoVentana");
+    if (contenido.style.display === "none") {
+      contenido.style.display = "block";
+    } else {
+      contenido.style.display = "none";
+    }
+  }
+
+</script>
+
+
+<script>
+  
+dragElement(document.getElementById("ventana1"));
+
+function dragElement(elmnt) {
+  const barra = document.getElementById("barra1");
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  barra.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e.preventDefault();
+    // posición inicial del mouse
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e.preventDefault();
+    // calcular distancia
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // mover el elemento
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+  
+  
+}
+
+
+
+
+
+dragElement(document.getElementById("ventana1"));
+
+function dragElement(elmnt) {
+  const barra = document.getElementById("barra1");
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  barra.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e.preventDefault();
+    // posición inicial del mouse
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e.preventDefault();
+    // calcular distancia
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // mover el elemento
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+    
+    
+    
+    
+  
+  
+  
+
+  
+  
+  
+    function abrir(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function cerrar(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+  
+  
+  
+  <script>
+  
+dragElement(document.getElementById("ventana1"));
+
+function dragElement(elmnt) {
+  const barra = document.getElementById("barra1");
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  barra.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e.preventDefault();
+    // posición inicial del mouse
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e.preventDefault();
+    // calcular distancia
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // mover el elemento
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+
+
+
+let contadorVentanas = 0;
+
+function crearVentanaNavegador() {
+  contadorVentanas++;
+  const id = `navegador${contadorVentanas}`;
+
+  const ventana = document.createElement("div");
+  ventana.className = "ventana-draggable";
+  ventana.id = id;
+  ventana.innerHTML = ;
+  
+
+
+
+
+ fetch('/datos') .then(res => res.json()) .then(data => {
+};
+
+</script>
+
+<!--
+<div class="ventana-draggable" id="ventana1"></div>
+<div class="barra-movible" id="barra1">🔲 Ventana Twitch</div>
+  <iframe width="100%" height="240" src="https://www.twitch.tv/embed/oscarcdzz/chat?parent=localhost" allowfullscreen></iframe>
+</div>
+-->
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<!--
+
+  <header>
+    <div><strong>MyPlace Oz</strong></div>
+    <div class="PERFIL">
+      <button>Perfil</button>
+    </div>
+    <div class="barra-busquedaConfig">
+      <input type="text" placeholder="Buscar aquí...">
+      <button>🔍</button>
+    </div>
+  </header>
+
+  
+  
+  
+html -->
+
+
+<script> fetch('/datos') .then(res => res.json()) .then(data => {
+}
+ <div class="ventana-draggable" id="ventana1">
+  <div class="barra-movible" id="barra1">🔲 Ventana Twitch</div>
+  <iframe width="100%" height="240" src="https://www.twitch.tv/embed/oscarcdzz/chat?parent=localhost" allowfullscreen></iframe>
+</div>
+</script>
+
+
+<!--Ahora añade este JS justo antes de cerrar </body>:
+
+html
+-->
+
+<!--
+🧠  Y este JavaScript
+html-->
+
+
+<script>
+  function minimizarVentana() {
+    const contenido = document.getElementById("contenidoVentana");
+    if (contenido.style.display === "none") {
+      contenido.style.display = "block";
+    } else {
+      contenido.style.display = "none";
+    }
+  }
+</script>
+
+
+
+
+
+
+
+<script>
+crearVentana({
+  titulo: "Navegador",
+  contenido: "
+  
+  <iframe src='https://example.com' width='100%' height='100%'></iframe>
+})
+</script>
+
+
+<!--
+🧩 Componentes clave a implementar:
+Componente	Descripción
+.ventana	Contenedor flotante
+
+🧭 1. ¿Se puede hacer un navegador simple dentro de una ventana?
+¡Sí! Puedes simular uno con un <iframe> donde el usuario escriba una URL y se cargue dentro de esa ventana. Un ejemplo básico:
+
+html
+-->
+
+<div onshow="none" onshow="null" onshow="none" closeDragElement="oculta"
+ 
+id="navegador" class="ventana">
+  
+  <input type="text" id="url" placeholder="Escribe una URL..." />
+  <button onclick="cargarSitio()">Ir🔍</button>
+  <iframe id="visor" width="100%" height="300px"></iframe>
+</div>
+
+<script>
+  function cargarSitio() {
+    const url = document.getElementById("url").value;
+    document.getElementById("visor").src = url.startsWith("http") ? url : "https://" + url;
+  }
+</script>-->
+
+
+
+
+<!--
+
+Con eso, mini navegador 🌐 en una ventana flotante de tu sistema.
+
+🧠 2.
+
+
+html
+
+<div class="barra-inferior">
+  <button onclick="crearVentanaNavegador()">🌐 Navegador</button>
+  <button onclick="crearVentanaMinecraft()">🧱 Mini-Minecraft</button>
+</div>
+
+
+javascript-->
+
+
+<script>
+let contadorVentanas = 0;
+
+function crearVentanaNavegador() {
+  contadorVentanas++;
+  const id = `navegador${contadorVentanas}`;
+
+  const ventana = document.createElement("div");
+  ventana.className = "ventana-draggable";
+  ventana.id = "id";
+  ventana.innerHTML = "`";  
+  class="barra-movible" onmousedown="arrastrarVentana('${id}', event)";
+    🌐 Navegador ${contadorVentanas}
+    </script>
+    <!-- 
+    <button onclick="document.getElementById('${id}').remove()">❌</button>
+
+  <input type="text" placeholder="URL..." onkeypress="if(event.key==='Enter'){ cargarURL(this, '${id}-iframe') }">
+  <iframe id="${id}-iframe" width="100%" height="200px"></iframe>
+
+<!--También necesitarías un arrastrarVentana() como el que ya usamos antes 😉 y algo de
+
+CSS-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+  <!-- Ventanas -->
+  <div id="explorador" class="ventana">
+    
+      <input type="text" id="url" placeholder="Buscar" />
+    
+    
+    <span class="cerrar" onclick="cerrar('explorador')">✖</span>
+    <h3>Explorador de Archivos</h3>
+    <p>Imagen simulada:</p>
+    <img src="https://via.placeholder.com/150" alt="Imagen" width="100%">
+  </div>
+
+  <div id="navegador" class="ventana">
+    <span class="cerrar" onclick="cerrar('navegador')">✖</span>
+    <h3>Navegador Web</h3>
+    <p>Simulación de navegador.</p>-->
+  </div>
+
+
+
+
+  <!-- Barra inferior -->
+  <div class="barra-inferior">
+    
+    
+    <button onclick="abrir('menu')" >  MENU</button>
+    <div ><input ="Buscar "><button>buscar🔍</button></input></div>
+      
+    
+    <button onclick="abrir('explorador')" >📁 Archivos</button>
+    <button onclick="abrir('navegador')">🌐 Navegador</button>
+    
+    
+  
+    <button onclick="abrir('xwindow')">xwindow </button>
+    
+    
+  
+      <!--<input type="text" id="url" placeholder="Buscar" />-->
+  
+  </div>
+
+<script>
+  if onclick= (button=xwindow) {
+    
+  
+  if contadorVentanas=""{
+    onshow ="";
+    abrir= xwindow; 
+    Mostrar=xwindow;
+    
+    
+  }
+}
+</script>
+  
+  
+  
+
+
+
+  
+   <div class="window"> 
+ <!-- <div class="xwindow"> -->
+    <div class="resizer corner tl"></div>
+    <div class="resizer corner tr"></div>
+    <div class="resizer corner bl"></div>
+    <div class="resizer corner br"></div>
+    <div class="resizer t"></div>
+    <div class="resizer b"></div>
+    <div class="resizer l"></div>
+    <div class="resizer r"></div>
+
+    <div class="body">
+      <div class="topbar">
+        <div class="btns">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+      <!-- your content here -->
+    </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <!--<! server URL VINCULACION */ -->
+    
+    <script>
+  fetch('/datos')
+    .then(res => res.json())
+    .then(data => {
+      // puedes actualizar el DOM con los datos recibidos
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos:', error);
+    });
+</script>
+  
+  
+  
+  
+
+  
+  
+  
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+   
+
+    
+    
+
+    /* Barra superior */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
+      padding: 30px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .barra-busqueda input {
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .barra-busqueda button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Contenido principal con espacio para la barra superior */
+    
+    
+    
+    main {
+      padding: 80px 20px;
+      margin-left: 100px; /* Espacio mínimo cuando la barra lateral está oculta */
+    }
+
+    /* Barra lateral colapsable */
+    .sidebar {
+      position: fixed;
+      top: 29px;
+      left: -150px; /* Oculta la mayor parte */
+      width: 180px;
+      height: 100%;
+      background-color: #34495e;
+      color: white;
+      padding: 20px 10px;
+      transition: left 0.3s;
+      z-index: 999;
+    }
+
+    .sidebar:hover {
+      left: 0; /* Se muestra cuando pasa el mouse encima */
+    }
+
+    .sidebar button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 8px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    
+/* <!--   Y este CSS dentro del <style>:*/
+
+
+.ventana-draggable {
+  width: 500px;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  border: 2px solid #1abc9c;
+  background-color: #ecf0f1;
+  z-index: 2000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.barra-movible {
+  background-color: #16a085;
+  color: white;
+  cursor: move;
+  padding: 10px;
+  font-weight: bold;
+}
+
+    .barra-movible button {
+  float: right;
+  background-color: #e67e22;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.contenido-ventana {
+  transition: all 56.3s ease;
+}
+    
+    
+    
+    
+    
+    
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .barra-busqueda input {
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .barra-busqueda button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Contenido principal con espacio para la barra superior */
+    main {
+      padding: 80px 20px;
+      margin-left: 60px; /* Espacio mínimo cuando la barra lateral está oculta */
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </style>
+  
+  
+  
+  
+  <script>
+  function minimizarVentana() {
+    const contenido = document.getElementById("contenidoVentana");
+    if (contenido.style.display === "none") {
+      contenido.style.display = "block";
+    } else {
+      contenido.style.display = "none";
+    }
+  }
+</script> -->
+
+
+  <script> dragElement(document.getElementById("ventana1"));
+
+function dragElement(elmnt) {
+  const barra = document.getElementById("barra1");
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  barra.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e.preventDefault();
+    // posición inicial del mouse
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e.preventDefault();
+    // calcular distancia
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // mover el elemento
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+
+</script>
+
+<!-- Función para obtener datos del servidor-->
+
+<script>
+function obtenerDatos() {
+  fetch('/datos')
+    .then(res => res.json())
+    .then(data => {
+      console.log('Datos recibidos:', data);
+      // Actualizar DOM si quieres, ejemplo:
+      const main = document.querySelector('main');
+      main.innerHTML += `<p>Mensaje del servidor: ${data.mensaje}</p>`;
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos:', error);
+    });
+}
+
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', obtenerDatos);
+
+
+
+//<script>
+  fetch('/datos')
+    .then(res => res.json())
+    .then(data => {
+      // puedes actualizar el DOM con los datos recibidos
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos:', error);
+    });
+</script>
+
+
+
+<!--
+fetch('/datos', {dpg-d1dbh015pdvs73ak963g-a });
+//    dpg-d1dbh015pdvs73ak963g-a
+-->
+
+
+<script> 
+main. infoUser.html
+  // Variables
+  
+ let nombre = "";
+  let edad = "";
+
+ //Mostrar mensaje
+  alert("Hola, " + nombre + ". Este es  " + OS + " años.");
+</script>
+
+
+
+
+
+<!--//VARIABLE BARRA SUPERIOR 
+//const barhud = header.barra{
+  
+//}
+
+
+
+
+
+
+//barra superior-->
+
+<style> 
+header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .barra-busqueda input {
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .barra-busqueda button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Contenido principal con espacio para la barra superior */
+    main {
+      padding: 80px 20px;
+      margin-left: 60px; /* Espacio mínimo cuando la barra lateral está oculta */
+    }
+</style>
+
+
+
+<script>
+  function minimizarVentana() {
+    const contenido = document.getElementById("contenidoVentana");
+    if (contenido.style.display === "none") {
+      contenido.style.display = "block";
+    } else {
+      contenido.style.display = "none";
+    }
+  }
+</script>
+
+
+<style>
+
+frameURLTwitch {
+
+ position: fixed;
+      top: 20;
+      left: 020;
+      width: 100%;
+      background-color: #1e1e1e;
+      color: white;
+      padding: 100px 200px;
+      display: flex;
+      align-items: center;
+      z-index: 360;
+  
+ frameUrlTwtc = ("https://www.twitch.tv/videos/2476610189?t=0h4m7s");
+  
+}
+</style>
+
+
+  
+  
+  
+  
+  
+  
+  
+  <!--
+  
+  
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventana de OS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .window {
+      width: 400px;
+      height: 300px;
+      background-color: #ffffff;
+      border: 2px solid #000;
+      border-radius: 8px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .title-bar {
+      background-color: #0078d7;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+    }
+
+    .title-bar button {
+      background-color: #ff5c5c;
+      border: none;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+
+    .content {
+      padding: 20px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+
+<!--
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <span>Ventana de OS</span>
+      <button onclick="closeWindow()">X</button>
+    </div>
+    <div class="content">
+      <p>Este es el contenido de la ventana. Puedes personalizarlo como desees.</p>
+    </div>
+  </div>
+
+  <script>
+    function closeWindow() {
+      const windowElement = document.querySelector('.window');
+      windowElement.style.display = 'none';
+    }
+  </script>
+</body>-->
+
+
+
+<!-- Extraer archivos para servidor 
+<script src="script.js"></script> -->
+
+
+
+
+<body>
+  
+  
+  <!--Ahora añade este JS justo antes de cerrar </body>:
+
+html--> 
+
+
+  
+
+  <!-- Barra lateral oculta -->
+  <div class="sidebar">
+    <a href="index.html"></a><button> Pagina Principal</button>
+    <a href="streaming.html"><button>STREAMINGS</button></a>
+    <a href="InfoUser.html" ></a><button>⚙ Información  </button></a>
+    <a href="OS.html"><button> Operative System 0z </button></a>
+    <a href="configuracion.html"><button>⚙ Ir Configuración</button></a>
+    
+  </div>
+
+  <!-- Barra superior -->
+  <header>
+    <div><strong> Santuario - Systema Operative </strong></div>
+    <div class ="PERFIL" >
+      <button>Perfil  </button>
+        </div>
+    
+    <div class="barra-busqueda">
+      <input type="text" placeholder="Buscar aquí...">
+      <button>🔍</button>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main>
+    
+    
+  <!--  <h2>¡Hola, BIENVENIDO!</h2>
+  
+  <p>Este es tu espacio principal. Aquí irá el contenido de tu sitio o aplicación web.</p>
+  </main>
+  
+  
+  <main>
+  
+  <! <iframe width="240px" height="144px" src="https://www.youtube.com/embed/IFqBL5ZBAPE" title="VICTORIA  ahora si el video bien JAJA(clasificatoria oro)" 
+    frameborder="3px" 
+    allow="accelerometer"; 
+    autoplay; clipboard-write;
+    encrypted-media; gyroscope; 
+    picture-in-picture;
+    web-share"" referrerpolicy=""
+    strict-origin-when-cross-origin""
+    allowfullscreen></iframe>
+    
+    
+    
+    <iframe width="400" height="240px" 
+    src="https://www.youtube.com/embed/ygWy_JXjNZQ?list=RDygWy_JXjNZQ"
+    title="Rock Hype (instrumental)" 
+    frameborder="0" 
+    allow="accelerometer"; 
+    autoplay; clipboard-write; encrypted-media; gyroscope; 
+    picture-in-picture;
+    web-share" referrerpolicy="""
+    strict-origin-when-cross-origin=" allowfullscreen"></iframe>
+    
+    <iframe width="400px" height="240px" 
+    src="https://www.youtube.com/embed/ygWy_JXjNZQ" 
+    title="Rock Hype" 
+    frameborder="2px" allow="" 
+    accelerometer; 
+    autoplay; clipboard-write; encrypted-media; 
+    gyroscope; picture-in-picture;
+    web-share""
+    referrerpolicy="strict-origin-when-cross-origin" 
+    allowfullscreen></iframe>
+    
+    
+    
+    <iframe width="400px" height="240px" src="https://www.youtube.com/embed/WfCOR9YrwTs?list=RDWfCOR9YrwTs" title="Metal Heart" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
+    
+    
+    <iframe width="400px" height="240px" 
+    src="https://www.youtube.com/embed/SA-ZC2dsJbM" title="Sorry for that - 0z Clef (Original Song) (Instrumental)" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen></iframe>
+    
+    
+   
+   <iframe width="400px" height="240px" 
+   src="https://www.youtube.com/embed/ygWy_JXjNZQ" title="Rock Hype" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" 
+    allowfullscreen></iframe>-->
+    
+    
+    
+   <!--<div class ="frameURLTwitch">
+   
+   <frameURLTwitch   width="240px" height="144px" 
+      src= "https://youtu.be/Ih1tyJwauuM?t=323" 
+      frameborder="5px" allow="accelerometer";
+      autoplay; clipboard-write; 
+      encrypted-media; gyroscope; 
+      picture-in-picture; web-share""
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen> </frameURLTwitch>
+      
+    </div>-->
+    
+    
+    
+    <!--Agrega este HTML dentro del <body>:
+
+
+ <div class="ventana-draggable" id="ventana1">
+   <input text="_">  
+  
+  <div class="barra-movible" id="barra1">
+    
+    🔲 LIVE & News
+  <button onclick="minimizarVentana()"> _</button>
+  </div>
+  
+  <div class ="contenido-ventana" id="contenidoVentana">
+    <iframe width="100%" height="144px" src="https://youtu.be/Ih1tyJwauuM?t=323" allowfullscreen></iframe>
+    
+  </div>-->
+  
+  
+</div>
+    
+    
+    
+    
+    
+  </main>
+  
+  
+  
+  
+
+
+
+
+
+
+
+</body>
+
+
+</body>
+
+</html>
+
+
+
+
+</html>

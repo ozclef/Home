@@ -1,0 +1,96 @@
+
+<!-- En tu HTML (en el <head> o justo antes de </body>)-->
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<!--Y ya después puedes crear una función que inicie una ventana div como las de tu sistema operativo y le meta ese cubo 3D mágico:
+
+html
+<script src=> -->
+  
+</script>
+
+
+<div class="ventana-draggable" id="miniMinecraft">
+  <div class="barra-movible">🧱 MiniMinecraft</div>
+  <div id="contenedor3D" style="width:100%; height:300px;"></div>
+</div>
+
+<div id="menu">
+  <h1>✨ UnidosCraft ✨</h1>
+  <button onclick="iniciarJuego('creativo')">Modo Creativo</button>
+  <button onclick="iniciarJuego('survival')">Modo Survival</button>
+</div>
+
+<script>
+function iniciarJuego(modo) {
+  console.log("Modo seleccionado:", modo);
+  document.getElementById("menu").style.display = "none";
+  iniciarEscenario(modo);
+}
+</script>
+
+
+<div id="menu-creativo" class="panel-creativo">
+  <div class="bloque" onclick="seleccionar('madera')"><img src="img/madera.png" /></div>
+  <div class="bloque" onclick="seleccionar('tierra')"><img src="img/tierra.png" /></div>
+  <div class="bloque" onclick="seleccionar('horno')"><img src="img/horno.png" /></div>
+  <div class="bloque" onclick="seleccionar('palo')"><img src="img/palo.png" /></div>
+  <!-- y así sucesivamente -->
+</div>
+
+
+
+
+<div class="ventana-draggable" id="ventanaMinecraft">
+  <div class="barra-superior">🧱 MiniMinecraft</div>
+  <div id="escenario3D" style="width:100%; height:300px;"></div>
+</div>
+
+<!--🎨 Puedes crear tus texturas pixeladas en Piskel o incluso en un canvas manual.
+🧰 Mesa de crafteo (3x3 = 9 espacios)
+Esto puedes simularlo con un grid HTML de 3×3 (display: grid con grid-template-columns: repeat(3, 1fr)).
+Cada celda sería un div cuadrado donde arrastras ítems desde el inventario.
+🧺 HUD / Inventario
+Puedes fijar un div tipo #hud abajo con las 9 ranuras accesibles con teclas del 1 al 9.
+Para el diseño, puedes usar íconos o imágenes con estilo pixel.
+html-->
+<div id="inventario" class="hud">
+  <div class="slot" data-key="1"></div>
+  <div class="slot" data-key="2"></div>
+  ...
+</div>
+
+
+🧠
+
+<div id="menu-creativo" class="panel-creativo">
+  <div class="bloque" onclick="seleccionar('madera')"><img src="img/madera.png" /></div>
+  <div class="bloque" onclick="seleccionar('tierra')"><img src="img/tierra.png" /></div>
+  <div class="bloque" onclick="seleccionar('horno')"><img src="img/horno.png" /></div>
+  <div class="bloque" onclick="seleccionar('palo')"><img src="img/palo.png" /></div>
+  <!-- y así sucesivamente -->
+</div>
+
+
+
+
+
+
+
+<div>
+  <button onclick="window.location.href='page1.html'">OS</button>
+</div>
+No uses nombres con .html como clases o ids, eso puede ser confuso. Además, elimina el onclick duplicado y pon la redirección directamente en el botón.
+
+Si quieres que se abra en una nueva pestaña, usa:
+
+<button onclick="window.open('page1.html', '_blank')">OS</button>
+
+<div class="page1.html" onclick="page1.html"><button id="page1.html"  class="page1.html" onclick="page1.html"  >OS</button> </div>
+
+
+
+  
+</body>
+
+  
+</html>

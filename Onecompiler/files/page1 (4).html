@@ -1,0 +1,189 @@
+me ayudas a aprender a escribir un javascript con estos codigos que tengo en html o a importar porfavor,
+
+Claro, te puedo ayudar a integrar y escribir código JavaScript en tu archivo HTML, y también a importar archivos externos de JavaScript.
+
+1. Escribir JavaScript dentro de HTML
+Puedes escribir JavaScript directamente dentro de la etiqueta <script> en tu archivo HTML. Por ejemplo:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ejemplo JavaScript</title>
+</head>
+<body>
+
+  <h1 id="saludo">Hola Mundo</h1>
+
+  <script>
+    // Aquí va tu código JavaScript
+    document.getElementById('saludo').textContent = 'Hola desde JavaScript!';
+  </script>
+
+</body>
+</html>
+2. Importar un archivo externo JavaScript
+Si tienes un archivo externo, por ejemplo script.js, puedes importarlo en tu HTML con:
+
+<script src="script.js"></script>
+Este script se ejecutará cuando la página cargue.
+
+Aplicado a tus archivos actuales
+Tienes un archivo llamado script.js con código para mostrar la hora actual:
+
+function showTime() {
+  document.getElementById('currentTime').innerHTML = new Date().toUTCString();
+}
+showTime();
+setInterval(function () {
+  showTime();
+}, 1000);
+Para usarlo, haz lo siguiente:
+
+En tu index.html, agrega un elemento donde se mostrará la hora, por ejemplo:
+<div id="currentTime"></div>
+Justo antes de cerrar la etiqueta </body>, incluye el script externo:
+<script src="script.js"></script>
+Así tu HTML quedaría:
+
+<body>
+  <!-- Otros contenidos -->
+
+  <div id="currentTime"></div>
+
+  <script src="script.js"></script>
+</body>
+Nota sobre tu código actual con three.js
+Tu código ya tiene un <script type="module"> para importar y usar módulos ES6 (como three.js). Si quieres agregar código extra de JavaScript dentro de ese bloque, puedes hacerlo ahí.
+
+Si prefieres separar tu código en varios archivos, puedes crear un archivo .js y luego importarlo dentro del módulo principal con:
+
+import { funcionQueNecesitas } from './miArchivo.js';
+Pero para eso, tu archivo debe ser también un módulo (con type="module").
+
+Si quieres, puedo ayudarte a escribir un ejemplo con tu código actual, solo dime qué quieres hacer exactamente. ¿Quieres mostrar la hora mientras usas three.js? ¿O un ejemplo más básico?
+
+si porfavor ayudame a escribir un ejemplo, quisiera hacer que funcione un personaje para usar Three.js
+
+Perfecto, te ayudaré a hacer un ejemplo sencillo para cargar un personaje 3D usando Three.js, similar a lo que tienes pero un poco más básico y claro para que puedas entenderlo.
+
+Ejemplo básico para cargar un modelo OBJ con materiales MTL usando Three.js
+Paso 1: Estructura HTML básica con tu canvas y scripts
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ejemplo Three.js - Cargar personaje OBJ + MTL</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    #info {
+      position: absolute;
+      top: 10px; left: 10px;
+      color: white;
+      font-family: Arial, sans-serif;
+      z-index: 1;
+      background: rgba(0,0,0,0.5);
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="info">Arrastra para rotar, usa scroll para acercar/alejar</div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/"
+      }
+    }
+  </script>
+
+  <script type="module">
+
+    import * as THREE from 'three';
+    import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
+    import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    let scene, camera, renderer, controls;
+
+    init();
+    animate();
+
+    function init() {
+      // Escena
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x222222);
+
+      // Cámara
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 100);
+      camera.position.set(0, 1.5, 3);
+
+      // Luz ambiental
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+
+      // Luz puntual
+      const pointLight = new THREE.PointLight(0xffffff, 0.8);
+      pointLight.position.set(5, 5, 5);
+      scene.add(pointLight);
+
+      // Renderer
+      renderer = new THREE.WebGLRenderer({antialias:true});
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Controles de cámara
+      controls = new OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 1, 0);
+      controls.update();
+
+      // Cargar materiales y modelo
+      const mtlLoader = new MTLLoader();
+      mtlLoader.setPath('models/obj/male02/'); // Ruta a tus archivos MTL y OBJ
+      mtlLoader.load('male02.mtl', (materials) => {
+        materials.preload();
+
+        const objLoader = new OBJLoader();
+        objLoader.setMaterials(materials);
+        objLoader.setPath('models/obj/male02/');
+        objLoader.load('male02.obj', (object) => {
+          object.position.y = -0.95;  // Ajusta para que quede en el suelo
+          object.scale.setScalar(0.01); // Escala para que sea visible
+          scene.add(object);
+        });
+      });
+
+      window.addEventListener('resize', onWindowResize);
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+
+  </script>
+
+</body>
+</html>
+Explicación rápida
+Usamos módulos ES6 con type="module" para importar Three.js y los loaders.
+Creamos la escena, la cámara y las luces básicas.
+Usamos MTLLoader para cargar los materiales y luego OBJLoader para cargar el modelo.
+El modelo se escala y posiciona para que se vea bien.
+Se usan controles de órbita para rotar y acercar la cámara con el mouse.
+Se adapta el canvas al tamaño de la ventana.
+¿Qué debes hacer?
+Debes mantener la carpeta models/obj/male02/ con tus archivos male02.obj y male02.mtl en la ruta relativa correcta.
+Puedes usar este código en un archivo .html y abrirlo con un servidor local (por ejemplo con VSCode Live Server o Python SimpleHTTPServer) para evitar problemas de CORS.
+Si quieres, puedes cambiar el modelo por otro, solo cambia las rutas en setPath y load.
+Si quieres, también te puedo ayudar a hacerlo funcionar con tu estructura actual o agregarle más funcionalidades. ¿Quieres que te explique algo más o extender el ejemplo?

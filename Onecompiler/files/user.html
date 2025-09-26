@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>User</title>
+  <script>
+    let InfoPlus = ""; // Aquí guardamos lo que escriba el usuario
+
+    function guardarTexto() {
+      let entrada = document.getElementById("entradaTexto").value;
+      InfoPlus = entrada;
+      alert("Texto guardado: " + InfoPlus);
+    }
+  </script>
+</head>
+<body>
+  <h2>Escribe algo:</h2>
+  <input type="text" id="entradaTexto" placeholder="Tu mensaje aquí...">
+  <button onclick="guardarTexto()">Guardar</button>
+</body>
+</html>

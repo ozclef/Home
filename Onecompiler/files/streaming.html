@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    
+    <meta charset="UTF-8">
+  <title> 0z WEB</title>
+  
+  
+   <!--<! server URL VINCULACION */ -->
+    
+    <script>
+  fetch('/datos')
+    .then(res => res.json())
+    .then(data => {
+      // puedes actualizar el DOM con los datos recibidos
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos:', error);
+    });
+</script>
+  
+  
+  
+  
+
+  
+  
+  
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+   
+
+    
+    
+
+    /* Barra superior */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .barra-busqueda input {
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .barra-busqueda button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Contenido principal con espacio para la barra superior */
+    
+    
+    
+    main {
+      padding: 80px 20px;
+      margin-left: 60px; /* Espacio mínimo cuando la barra lateral está oculta */
+    }
+
+    /* Barra lateral colapsable */
+    .sidebar {
+      position: fixed;
+      top: 20px;
+      left: -150px; /* Oculta la mayor parte */
+      width: 180px;
+      height: 100%;
+      background-color: #34495e;
+      color: white;
+      padding: 20px 10px;
+      transition: left 0.3s;
+      z-index: 999;
+    }
+
+    .sidebar:hover {
+      left: 0; /* Se muestra cuando pasa el mouse encima */
+    }
+
+    .sidebar button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 8px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    
+/* <!--   Y este CSS dentro del <style>:*/
+
+
+.ventana-draggable {
+  width: 500px;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  border: 2px solid #1abc9c;
+  background-color: #ecf0f1;
+  z-index: 2000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.barra-movible {
+  background-color: #16a085;
+  color: white;
+  cursor: move;
+  padding: 10px;
+  font-weight: bold;
+}
+
+    .barra-movible button {
+  float: right;
+  background-color: #e67e22;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.contenido-ventana {
+  transition: all 56.3s ease;
+}
+    
+    
+    
+    
+     
+/*<!--Para poder crear una página web que visualice diferentes enlaces (URLs) y plataformas al mismo tiempo utilizando elementos HTML como <iframe>, ``, y <div>, puedes usar el siguiente código de ejemplo. Este código muestra cómo incrustar varias plataformas de streaming y enlaces en un mismo documento HTML.
+Ejemplo de Código HTML*/
+/*<meta charset="UTF-8">-->*/
+   
+    
+   /* <title>Multi-Streaming*/
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .stream-container {
+            width: 300px;
+            height: 200px;
+            margin: 10px;
+            border: 2px solid #ccc;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .stream-title {
+            background-color: #0073e6;
+            color: white;
+            padding: 5px;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+
+    
+    
+  </style>
+  
+   
+  <style>
+    body {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+    .stream-container {
+      width: 300px;
+      height: 200px;
+      margin: 10px;
+      border: 2px solid #ccc;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    .stream-title {
+      background-color: #0073e6;
+      color: white;
+      padding: 5px;
+      text-align: center;
+      font-weight: bold;
+    }
+    iframe {
+      flex-grow: 1;
+      border: none;
+      width: 100%;
+    }
+  </style>
+  
+  <script>
+//    2. Notas importantes sobre URLs y iframes
+//Dominio padre (parent): Twitch exige que incluyas el parámetro parent=tu-dominio.com en su iframe para permitir la incrustación. Cambia tu-dominio.com por tu dominio real (o localhost para pruebas locales).
+//Algunas plataformas no permiten iframes debido a políticas de seguridad (X-Frame-Options). En esos casos, solo puedes usar enlaces directos o APIs.
+//Para Lightstream y Streamlabs, normalmente se usan para producción de streaming, no para visualización directa en iframe, pero puedes abrir sus paneles o webs para control.
+//3. Permisos para cámara, micrófono y pantalla (captura)
+//Para acceder a la cámara, micrófono y pantalla (screen capture) usa la API getUserMedia y getDisplayMedia de JavaScript:
+
+async function obtenerPermisos() {
+  try {
+    // Acceder a cámara y micrófono
+    const streamCamMicro = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    console.log("Acceso a cámara y micrófono concedido", streamCamMicro);
+
+    // Acceder a captura de pantalla
+    const streamPantalla = await navigator.mediaDevices.getDisplayMedia({ video: true });
+    console.log("Acceso a captura de pantalla concedido", streamPantalla);
+
+    // Aquí puedes usar los streams para tu aplicación (ej. mostrar en video, enviar a servidor, etc.)
+  } catch (err) {
+    console.error("Error al solicitar permisos:", err);
+  }
+}
+
+// Llamar a la función para pedir permisos
+//obtenerPermisos();
+//4. Organización recomendada
+//Mantén el HTML separado de CSS y JS, preferiblemente en archivos externos.
+//Usa un contenedor para cada plataforma (como .stream-container).
+//Controla los permisos y la lógica de streaming con JavaScript.
+//Para transmitir con Lightstream o cualquier plataforma, normalmente usarás su software o SDK; el iframe solo muestra la página o panel.
+//5. Ejemplo completo para streaming.html (simplificado)
+  </script>
+  
+  
+</head>
+
+
+<!-- Extraer archivos para servidor 
+<script src="script.js"></script> -->
+
+
+
+<!--¡Hola! Para estructurar bien tu página streaming.html y mostrar 4 o 5 cuadros diferentes con URLs de diferentes plataformas (Twitch, Lightstream, etc.), además de permitir accesos a cámara, micrófono y pantalla para streaming, te doy una guía y ejemplo básico que puedes ampliar:
+
+1. Estructura HTML básica para múltiples cuadros (iframes)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi-Streaming</title>-->
+ 
+  
+</head>
+
+
+
+
+<body>
+
+  <div class="stream-container">
+    <div class="stream-title">Twitch</div>
+    <iframe src="https://player.twitch.tv/?channel=oscarcdzz&parent=tu-dominio.com" allowfullscreen></iframe>
+  </div>
+
+  <div class="stream-container">
+    <div class="stream-title">Lightstream</div>
+    <iframe src="https://lightstream.com" allowfullscreen></iframe>
+  </div>
+
+  <div class="stream-container">
+    <div class="stream-title">YouTube Live</div>
+    <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" allowfullscreen></iframe>
+  </div>
+
+  <div class="stream-container">
+    <div class="stream-title">Streamlabs</div>
+    <iframe src="https://streamlabs.com" allowfullscreen></iframe>
+  </div>
+
+  <div class="stream-container">
+    <div class="stream-title">Xbox</div>
+    <iframe src="https://www.xbox.com" allowfullscreen></iframe>
+  </div>
+
+</body>
+</html>
+2. Notas importantes sobre URLs y iframes
+Dominio padre (parent): Twitch exige que incluyas el parámetro parent=tu-dominio.com en su iframe para permitir la incrustación. Cambia tu-dominio.com por tu dominio real (o localhost para pruebas locales).
+Algunas plataformas no permiten iframes debido a políticas de seguridad (X-Frame-Options). En esos casos, solo puedes usar enlaces directos o APIs.
+Para Lightstream y Streamlabs, normalmente se usan para producción de streaming, no para visualización directa en iframe, pero puedes abrir sus paneles o webs para control.
+3. Permisos para cámara, micrófono y pantalla (captura)
+Para acceder a la cámara, micrófono y pantalla (screen capture) usa la API getUserMedia y getDisplayMedia de JavaScript:
+
+async function obtenerPermisos() {
+  try {
+    // Acceder a cámara y micrófono
+    const streamCamMicro = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    console.log("Acceso a cámara y micrófono concedido", streamCamMicro);
+
+    // Acceder a captura de pantalla
+    const streamPantalla = await navigator.mediaDevices.getDisplayMedia({ video: true });
+    console.log("Acceso a captura de pantalla concedido", streamPantalla);
+
+    // Aquí puedes usar los streams para tu aplicación (ej. mostrar en video, enviar a servidor, etc.)
+  } catch (err) {
+    console.error("Error al solicitar permisos:", err);
+  }
+}
+
+// Llamar a la función para pedir permisos
+obtenerPermisos();
+4. Organización recomendada
+Mantén el HTML separado de CSS y JS, preferiblemente en archivos externos.
+Usa un contenedor para cada plataforma (como .stream-container).
+Controla los permisos y la lógica de streaming con JavaScript.
+Para transmitir con Lightstream o cualquier plataforma, normalmente usarás su software o SDK; el iframe solo muestra la página o panel.
+5. Ejemplo completo para streaming.html (simplificado)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi-Streaming</title>
+  <style>
+    body {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+    .stream-container {
+      width: 320px;
+      height: 240px;
+      margin: 10px;
+      border: 2px solid #ccc;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    .stream-title {
+      background-color: #0073e6;
+      color: white;
+      padding: 5px;
+      text-align: center;
+      font-weight: bold;
+    }
+    iframe {
+      flex-grow: 1;
+      border: none;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stream-container">
+    <div class="stream-title">Twitch</div>
+    <iframe src="https://player.twitch.tv/?channel=oscarcdzz&parent=localhost" allowfullscreen></iframe>
+  </div>
+
+  <div class="stream-container">
+    <div class="stream-title">Lightstream</div>
+    <iframe src="https://lightstream.com" allowfullscreen></iframe>
+  </div>
+
+  <div class="stream-container">
+    <div class="stream-title">YouTube Live</div>
+    <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" allowfullscreen></iframe>
+  </div>
+
+  <div class="stream-container">
+    <div class="stream-title">Streamlabs</div>
+    <iframe src="https://streamlabs.com" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    async function obtenerPermisos() {
+      try {
+        const streamCamMicro = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        console.log("Permisos cámara y micrófono concedidos");
+        const streamPantalla = await navigator.mediaDevices.getDisplayMedia({ video: true });
+        console.log("Permiso captura de pantalla concedido");
+      } catch (err) {
+        console.error("Error al solicitar permisos:", err);
+      }
+    }
+
+    obtenerPermisos();
+  </script>
+
+</body>
+</html>
+Resumen
+Usa contenedores con iframes para cada plataforma.
+Asegúrate de usar parámetros requeridos como parent en Twitch.
+Pide permisos para cámara, micrófono y pantalla con JavaScript.
+Ten en cuenta que para hacer streaming real necesitarás software o SDK (Lightstream, OBS, Streamlabs, etc.).
+Puedes mostrar los paneles de esas plataformas en iframes si están permitidos.
+Si quieres ayuda para integrar SDKs o hacer streaming más avanzado, dime y te ayudo con ejemplos específicos.
+
+¡Espero que esto te ayude a organizar y visualizar tu página de streaming! Si quieres, puedo ayudarte a preparar un archivo organizado o mejorar el código. 😊
+
+<body>
+  
+  
+  <!--Ahora añade este JS justo antes de cerrar </body>:
+
+html--> 
+
+
+  
+
+  <!-- Barra lateral oculta -->
+  <div class="sidebar">
+    <button>Herramienta 1</button>
+    <a href="streaming.html"><button>STREAMINGS</button></a>
+    <a href="InfoUser.html" ></a><button>⚙ Información  </button></a>
+    <a href="OS.html"><button> Op Sys </button></a>
+    <a href="configuracion.html"><button>⚙ Ir Configuración</button></a>
+    
+  </div>
+
+  <!-- Barra superior -->
+  <header>
+    <div><strong> STREAMING VISUALS 0z </strong></div>
+    <div class ="PERFIL" >
+      <button>Perfil  </button>
+        </div>
+    
+    <div class="barra-busqueda">
+      <input type="text" placeholder="Buscar aquí...">
+      <button>🔍</button>
+    </div>
+  </header>
+
+    
+    
+  </head>
+  
+  <body>
+      <p>TODAS LAS VENTANAS DE STREAMING EN UNA SOLA</p>
+      
+      <main>
+       <!-- <iframe width="240px" height="144px" src="https://studio.golightstream.com/" frameborder="3px" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-->
+   
+    <div class="stream-container">
+        
+
+Twitch</body>
+        
+
+Lightstream<iframe src="https://lightstream.com" title="Lightstream">
+        
+
+Xbox<iframe src="https://www.xbox.com" title="Xbox">
+        
+
+Streamlabs<iframe src="https://streamlabs.com" title="Streamlabs">```
+
+<!--### Explicación
+
+1. **Estructura HTML Básica**: Definimos la estructura básica de HTML con el encabezado y el cuerpo del documento.
+
+2. **Estilo CSS**: 
+   - Utilizamos `flexbox` para mostrar los contenedores de transmisión en una cuadrícula.
+   - Cada contenedor de transmisión está diseñado para ser un poco más atractivo con sombra y borde.
+
+3. **Uso de `<iframe>`**: 
+   - Usamos elementos `<iframe>` para incrustar cada plataforma de streaming. 
+   - Cada `<iframe>` carga una URL diferente (Twitch, Lightstream, Xbox y Streamlabs).
+
+4. **Accesibilidad**: 
+   - Se ha añadido un atributo `title` a cada `<iframe>` para mejorar la accesibilidad.
+
+### Notas Importantes
+- Algunas plataformas pueden no permitir la incrustación de sus contenidos mediante `<iframe>` por razones de seguridad (esto se controla a través de HTTP headers como `X-Frame-Options`). En tales casos, te sugeriría usar enlaces directos con `<a>` en lugar de usar `<iframe>-->
+        
+      </main>
+      
+      
+      
+      
+      
+  </body>
+</html>
+

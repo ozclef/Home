@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+  
+  
+<head>
+  
+  
+  
+  <meta charset="UTF-8">
+  <title> 0z WEB</title>
+  
+  
+   <!--<! server URL VINCULACION */ -->
+    
+    <script>
+  fetch('/datos')
+    .then(res => res.json())
+    .then(data => {
+      // puedes actualizar el DOM con los datos recibidos
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos:', error);
+    });
+</script>
+  
+  
+  
+  
+
+  
+  
+  
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+   
+
+    
+    
+
+    /* Barra superior */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .barra-busqueda input {
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .barra-busqueda button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Contenido principal con espacio para la barra superior */
+    
+    
+    
+    main {
+      padding: 80px 20px;
+      margin-left: 60px; /* Espacio mínimo cuando la barra lateral está oculta */
+    }
+
+    /* Barra lateral colapsable */
+    .sidebar {
+      position: fixed;
+      top: 20px;
+      left: -150px; /* Oculta la mayor parte */
+      width: 180px;
+      height: 100%;
+      background-color: #34495e;
+      color: white;
+      padding: 20px 10px;
+      transition: left 0.3s;
+      z-index: 999;
+    }
+
+    .sidebar:hover {
+      left: 0; /* Se muestra cuando pasa el mouse encima */
+    }
+
+    .sidebar button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 8px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    
+/* <!--   Y este CSS dentro del <style>:*/
+
+
+.ventana-draggable {
+  width: 500px;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  border: 2px solid #1abc9c;
+  background-color: #ecf0f1;
+  z-index: 2000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.barra-movible {
+  background-color: #16a085;
+  color: white;
+  cursor: move;
+  padding: 10px;
+  font-weight: bold;
+}
+
+    .barra-movible button {
+  float: right;
+  background-color: #e67e22;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.contenido-ventana {
+  transition: all 56.3s ease;
+}
+    
+    
+    
+    
+    
+    
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .barra-busqueda input {
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .barra-busqueda button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Contenido principal con espacio para la barra superior */
+    main {
+      padding: 80px 20px;
+      margin-left: 60px; /* Espacio mínimo cuando la barra lateral está oculta */
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </style>
+  
+  
+  
+  
+  <script>
+  function minimizarVentana() {
+    const contenido = document.getElementById("contenidoVentana");
+    if (contenido.style.display === "none") {
+      contenido.style.display = "block";
+    } else {
+      contenido.style.display = "none";
+    }
+  }
+</script> -->
+
+
+  <script> dragElement(document.getElementById("ventana1"));
+
+function dragElement(elmnt) {
+  const barra = document.getElementById("barra1");
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  barra.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e.preventDefault();
+    // posición inicial del mouse
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e.preventDefault();
+    // calcular distancia
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // mover el elemento
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+
+</script>
+
+<!-- Función para obtener datos del servidor-->
+
+<script>
+function obtenerDatos() {
+  fetch('/datos')
+    .then(res => res.json())
+    .then(data => {
+      console.log('Datos recibidos:', data);
+      // Actualizar DOM si quieres, ejemplo:
+      const main = document.querySelector('main');
+      main.innerHTML += `<p>Mensaje del servidor: ${data.mensaje}</p>`;
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos:', error);
+    });
+}
+
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', obtenerDatos);
+
+
+
+//<script>
+  fetch('/datos')
+    .then(res => res.json())
+    .then(data => {
+      // puedes actualizar el DOM con los datos recibidos
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos:', error);
+    });
+</script>
+
+//fetch('/datos', {dpg-d1dbh015pdvs73ak963g-a });
+//    dpg-d1dbh015pdvs73ak963g-a
+
+
+//<script> 
+//main. infoUser.html
+//  // Variables
+//  
+// /let nombre = "";
+//  let edad = 25;
+//
+// //Mostrar mensaje
+//  alert("Hola, " + nombre + ". Tienes " + edad + " años.");
+//</script>
+
+
+
+
+
+<!--//VARIABLE BARRA SUPERIOR 
+//const barhud = header.barra{
+  
+//}
+
+
+
+
+
+
+//barra superior-->
+
+<style> 
+header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .barra-busqueda input {
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .barra-busqueda button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Contenido principal con espacio para la barra superior */
+    main {
+      padding: 80px 20px;
+      margin-left: 60px; /* Espacio mínimo cuando la barra lateral está oculta */
+    }
+</style>
+
+
+
+<script>
+  function minimizarVentana() {
+    const contenido = document.getElementById("contenidoVentana");
+    if (contenido.style.display === "none") {
+      contenido.style.display = "block";
+    } else {
+      contenido.style.display = "none";
+    }
+  }
+</script>
+
+
+
+<script> 
+<style>
+
+frameURLTwitch {
+
+ position: fixed;
+      top: 20;
+      left: 020;
+      width: 100%;
+      background-color: #1e1e1e;
+      color: white;
+      padding: 100px 200px;
+      display: flex;
+      align-items: center;
+      z-index: 360;
+  
+ frameUrlTwtc = ("https://www.twitch.tv/videos/2476610189?t=0h4m7s");
+  
+}
+
+</script>
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</head>
+
+
+<!-- Extraer archivos para servidor 
+<script src="script.js"></script> -->
+
+
+
+
+<body>
+  
+  
+  <!--Ahora añade este JS justo antes de cerrar </body>:
+
+html--> 
+
+
+  
+
+  <!-- Barra lateral oculta -->
+  <div class="sidebar">
+    <button>Herramienta 1</button>
+    <a href="streaming.html"><button>STREAMINGS</button></a>
+    <a href="InfoUser.html" ></a><button>⚙ Información  </button></a>
+    <a href="OS.html"><button> Op Sys </button></a>
+    <a href="configuracion.html"><button>⚙ Ir Configuración</button></a>
+    
+  </div>
+
+  <!-- Barra superior -->
+  <header>
+    <div><strong> Santuario </strong></div>
+    <div class ="PERFIL" >
+      <button>Perfil  </button>
+        </div>
+    
+    <div class="barra-busqueda">
+      <input type="text" placeholder="Buscar aquí...">
+      <button>🔍</button>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main>
+    
+    
+    <h2>¡Hola, BIENVENIDO!</h2>
+    <p>Este es tu espacio principal. Aquí irá el contenido de tu sitio o aplicación web.</p>
+  </main>
+  <main>
+    <iframe width="1168" height="657" src="https://www.youtube.com/embed/Ut41eePtfBk" title="Escenas Eliminadas de MrBeast" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!-- <iframe width="480px" height="244px" src="https://www.youtube.com/embed/tFsKulFcauY" title="Example of Consecutive Interpreting" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+  <! <iframe width="240px" height="144px" src="https://www.youtube.com/embed/IFqBL5ZBAPE" title="VICTORIA  ahora si el video bien JAJA(clasificatoria oro)" 
+    frameborder="3px" 
+    allow="accelerometer"; 
+    autoplay; clipboard-write;
+    encrypted-media; gyroscope; 
+    picture-in-picture;
+    web-share"" referrerpolicy=""
+    strict-origin-when-cross-origin""
+    allowfullscreen></iframe>
+    
+    
+    
+    <iframe width="400" height="240px" 
+    src="https://www.youtube.com/embed/ygWy_JXjNZQ?list=RDygWy_JXjNZQ"
+    title="Rock Hype (instrumental)" 
+    frameborder="0" 
+    allow="accelerometer"; 
+    autoplay; clipboard-write; encrypted-media; gyroscope; 
+    picture-in-picture;
+    web-share" referrerpolicy="""
+    strict-origin-when-cross-origin=" allowfullscreen"></iframe>
+    
+    <iframe width="400px" height="240px" 
+    src="https://www.youtube.com/embed/ygWy_JXjNZQ" 
+    title="Rock Hype" 
+    frameborder="2px" allow="" 
+    accelerometer; 
+    autoplay; clipboard-write; encrypted-media; 
+    gyroscope; picture-in-picture;
+    web-share""
+    referrerpolicy="strict-origin-when-cross-origin" 
+    allowfullscreen></iframe>
+    
+    
+    
+    <iframe width="400px" height="240px" src="https://www.youtube.com/embed/WfCOR9YrwTs?list=RDWfCOR9YrwTs" title="Metal Heart" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
+    
+    
+    <iframe width="400px" height="240px" 
+    src="https://www.youtube.com/embed/SA-ZC2dsJbM" title="Sorry for that - 0z Clef (Original Song) (Instrumental)" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen></iframe>
+    
+    
+   
+   <iframe width="400px" height="240px" 
+   src="https://www.youtube.com/embed/ygWy_JXjNZQ" title="Rock Hype" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" 
+    allowfullscreen></iframe>
+    
+    
+    
+    <div class ="frameURLTwitch">
+   
+   <frameURLTwitch   width="240px" height="144px" 
+      src= "https://youtu.be/Ih1tyJwauuM?t=323" 
+      frameborder="5px" allow="accelerometer";
+      autoplay; clipboard-write; 
+      encrypted-media; gyroscope; 
+      picture-in-picture; web-share""
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen> </frameURLTwitch>
+      
+    </div>
+      
+    
+    <div>
+      
+  
+  
+ <!-- ✨ 1. Ajusta tu HTML así:
+html -->
+
+
+<div class="ventana-draggable" id="ventana1">
+  <div class="barra-movible" id="barra1">
+    🔲 Ventana Twitch
+    <button onclick="minimizarVentana()">_</button>
+  </div>
+  <div class="contenido-ventana" id="contenidoVentana">
+    <iframe width="100%" height="100px" src="https://www.twitch.tv/embed/oscarcdzz/chat?parent=localhost" allowfullscreen></iframe>
+  </div>
+</div>-->
+
+
+<!--🎨 2. Añade este CSS si no lo tienes: css-->
+<style>
+.barra-movible button {
+  float: right;
+  background-color: #e67e22;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.contenido-ventana {
+  transition: all 0.3s ease;
+}
+
+</style>
+
+
+
+
+<!--🧠 3. Y este JavaScript:
+html-->
+
+
+
+
+
+
+    <script>
+    function minimizarVentana() {
+    const contenido = document.getElementById("contenidoVentana");
+    if (contenido.style.display === "none") {
+      contenido.style.display = "block";
+    } else {
+      contenido.style.display = "none";
+    }
+  }
+</script> 
+
+  <a href="https://www.twitch.tv/oscarcdzz" <button>twitch</button> </a>
+  
+  
+  <!-- <a>oscarcdzz. Todos los derechos reservados 2025°</a>
+  <p>
+  Agradecimientos a mis enseñanzas:
+  <p></p>
+  <p></p>https://www.mymap.ai/map?mid=brwBHpJAedBzi<p>
+    
+  </p>
+https://studio.firebase.google.com/u/4/studio-4332664922
+
+</p>-->
+
+    </div>
+    
+    
+    <!--Agrega este HTML dentro del <body>:
+
+
+ <div class="ventana-draggable" id="ventana1">
+   <input text="_">  
+  
+  <div class="barra-movible" id="barra1">
+    
+    🔲 LIVE & News
+  <button onclick="minimizarVentana()"> _</button>
+  </div>
+  
+  <div class ="contenido-ventana" id="contenidoVentana">
+    <iframe width="100%" height="144px" src="https://youtu.be/Ih1tyJwauuM?t=323" allowfullscreen></iframe>
+    
+  </div>-->
+  
+  
+</div>
+    
+    
+    
+    
+    
+  </main>
+  
+  
+  
+  
+
+<!--  ✨ 1. Ajusta tu HTML así:
+html 
+
+
+<div class="ventana-draggable" id="ventana1">
+  <div class="barra-movible" id="barra1">
+    🔲 Ventana Twitch
+    <button onclick="minimizarVentana()">_</button>
+  </div>
+  <div class="contenido-ventana" id="contenidoVentana">
+    <iframe width="100%" height="240" src="https://www.twitch.tv/embed/oscarcdzz/chat?parent=localhost" allowfullscreen></iframe>
+  </div>
+</div>-->
+
+
+<!--🎨 2. Añade este CSS si no lo tienes: css-->
+<style>
+.barra-movible button {
+  float: right;
+  background-color: #e67e22;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.contenido-ventana {
+  transition: all 0.3s ease;
+}
+
+</style>
+
+
+
+
+<!--🧠 3. Y este JavaScript:
+html-->
+
+
+
+
+
+
+    <!--<script>
+    function minimizarVentana() {
+    const contenido = document.getElementById("contenidoVentana");
+    if (contenido.style.display === "none") {
+      contenido.style.display = "block";
+    } else {
+      contenido.style.display = "none";
+    }
+  }
+</script> 
+  -->
+  <a href="https://www.twitch.tv/oscarcdzz" <button>twitch</button> </a>
+  
+  
+  <a>oscarcdzz. Todos los derechos reservados 2025°</a>
+<p>
+  Agradecimientos a mis enseñanzas:
+  <p></p>
+  <p></p>https://www.mymap.ai/map?mid=brwBHpJAedBzi<p>
+    
+  </p>
+https://studio.firebase.google.com/u/4/studio-4332664922
+
+</p>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <body>
+      <p>page1</p>
+  </body>
+</html>
+
+
+
+
+
+OS.html
+<!DOCTYPE html>
+<html lang="es">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OzcOS - Operative System US</title>
+
+  <link rel="stylesheet" href="OS.css" />
+  <script defer src="OS.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #1e1e1e;
+      color: white;
+      background-image: url('https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-2e1c-61f7-91a5-6d120648b0fe/raw?se=2025-06-24T13%3A50%3A08Z&sp=r&sv=2024-08-04&sr=b&scid=1a832529-6e0b-548c-80b6-b23dd6db4531&skoid=a3412ad4-1a13-47ce-91a5-c07730964f35&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-24T11%3A34%3A16Z&ske=2025-06-25T11%3A34%3A16Z&sks=b&skv=2024-08-04&sig=t5I7U7NIFypXdBWu8acx4LAu8wLMvAeO4eLKHMQnxEA%3D');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+  
+  
+  
+  
+<style>
+/* OS.css */
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #111;
+  color: white;
+}
+
+/* Context menu */
+#menuContextual {
+  position: absolute;
+  display: none;
+  background: #222;
+  border: 1px solid #444;
+  padding: 10px;
+  z-index: 999;
+}
+
+#menuContextual button {
+  display: block;
+  background: none;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  text-align: left;
+  cursor: pointer;
+}
+
+#menuContextual button:hover {
+  background: #444;
+}
+
+/* Barra inferior */
+.barra-inferior {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.barra-inferior button {
+  background: #444;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Ventanas */
+.ventana {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 300px;
+  height: 200px;
+  background-color: #2c2c2c;
+  border: 2px solid #555;
+  padding: 10px;
+  z-index: 999;
+}
+
+.ventana h3 {
+  margin-top: 0;
+}
+
+.cerrar {
+  float: right;
+  cursor: pointer;
+  color: red;
+}
+
+/* Ventana draggable */
+.ventana-draggable {
+  width: 500px;
+  position: absolute;
+  border: 2px solid #1abc9c;
+  background-color: #ecf0f1;
+  z-index: 2000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.barra-movible {
+  background-color: #16a085;
+  color: white;
+  cursor: move;
+  padding: 10px;
+  font-weight: bold;
+  user-select: none;
+}
+
+.barra-movible button {
+  float: right;
+  background-color: #e67e22;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.contenido-ventana {
+  transition: all 0.3s ease;
+}
+
+/* Example window style */
+.window {
+  width: 600px;
+  height: 400px;
+  min-width: 300px;
+  min-height: 200px;
+  position: absolute;
+}
+
+
+</style>
+
+/* Resizers (if used) */
+/* Add styles for resizers if implementing resizing functionality */
+
+</head>
+
+
+
+
+
+
+<body oncontextmenu="return false">
+
+  <!-- Context menu -->
+  <div id="menuContextual" style="display:none; position:absolute; background:#222; border:1px solid #444; padding:10px; z-index:999;">
+    <button onclick="cerrarVentana()">❌ Cerrar ventana</button>
+    <button onclick="alert('Opción 2')">⚙ Opción personalizada</button>
+  </div>
+
+  <div id="ventana" style="margin:40px; padding:20px; border:2px solid white;">
+    <h3>Mi Ventana</h3>
+    <p>Haz clic derecho sobre esta área.</p>
+  </div>
+
+  <!-- Barra superior -->
+  <header>
+    <div><strong>MyPlace Oz</strong></div>
+    <div class="PERFIL">
+      <button>Perfil</button>
+    </div>
+    <div class="barra-busquedaConfig">
+      <input type="text" placeholder="Buscar aquí..." />
+      <button>🔍</button>
+    </div>
+  </header>
+
+  <main>
+    <p>Este es la web Configuraciones</p>
+  </main>
+
+  <!-- Ventana draggable -->
+  <div class="ventana-draggable" id="ventana1" style="top:200px; left:100px;">
+    <div class="barra-movible" id="barra1">🔲 Ventana Twitch
+      <button onclick="minimizarVentana()" style="float:right; background:#e67e22; border:none; color:white; cursor:pointer; padding:4px 8px; border-radius:4px; font-weight:bold;">_</button>
+    </div>
+    <div class="contenido-ventana" id="contenidoVentana">
+      <iframe width="100%" height="240" src="https://www.twitch.tv/embed/oscarcdzz/chat?parent=localhost" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Context menu
+    const menu = document.getElementById("menuContextual");
+    const ventana = document.getElementById("ventana");
+
+    ventana.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+      menu.style.top = e.pageY + "px";
+      menu.style.left = e.pageX + "px";
+      menu.style.display = "block";
+    });
+
+    document.addEventListener("click", function () {
+      menu.style.display = "none";
+    });
+
+    function cerrarVentana() {
+      ventana.style.display = "none";
+    }
+
+    // Minimize Twitch window content
+    function minimizarVentana() {
+      const contenido = document.getElementById("contenidoVentana");
+      if (contenido.style.display === "none") {
+        contenido.style.display = "block";
+      } else {
+        contenido.style.display = "none";
+      }
+    }
+
+    // Drag functionality for ventana1
+    dragElement(document.getElementById("ventana1"));
+
+    function dragElement(elmnt) {
+      const barra = document.getElementById("barra1");
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+      barra.onmousedown = dragMouseDown;
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+  </script>
+
+</body>
+</html>

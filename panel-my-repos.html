@@ -188,5 +188,60 @@
   // Cargar primero por defecto
   if(repos[0].page) viewer.src = repos[0].page;
 </script>
+
+
+1. ¿Por qué no se muestra la vista previa de las páginas en el <iframe>?
+GitHub no permite cargar directamente la vista de archivos HTML individuales desde la interfaz de GitHub en un <iframe> por políticas de seguridad (CSP, X-Frame-Options).
+Solo puedes mostrar en <iframe> las páginas desplegadas en GitHub Pages (ejemplo: https://ozclef.github.io/home/).
+Si intentas usar una URL como https://github.com/ozclef/home/blob/main/index.html, verás que no carga en el <iframe>, ni siquiera muestra la vista HTML, solo la página de GitHub.
+2. ¿Puedo mostrar los códigos fuente en un <div>?
+¡Sí! Puedes cargar el código fuente de los archivos (por ejemplo, HTML, CSS, JS) usando la API de GitHub y mostrarlo en un <div> con resaltado de sintaxis.
+
+Ejemplo básico usando fetch:
+
+js
+// Obtiene el contenido de un archivo y lo muestra en un div
+fetch('https://raw.githubusercontent.com/ozclef/home/main/index.html')
+  .then(r => r.text())
+  .then(code => {
+    document.getElementById('codigo').textContent = code;
+  });
+Y en tu HTML:
+
+HTML
+<pre id="codigo"></pre>
+Puedes usar librerías como Prism.js o Highlight.js para resaltar el código.
+
+3. ¿Puedo mostrar la vista previa final de la página?
+SÍ, pero solo si el HTML está desplegado en GitHub Pages o en un servidor accesible.
+Ejemplo:
+HTML
+<iframe src="https://ozclef.github.io/home/" width="100%" height="500"></iframe>
+4. ¿Puedo mostrar ambos (código y vista previa) al mismo tiempo?
+¡Sí! Puedes usar un diseño con dos paneles: uno <div> para el código fuente, otro <iframe> para la vista desplegada.
+
+Ejemplo de estructura:
+
+HTML
+<div style="display:flex;">
+  <pre id="codigo" style="width:50%;"></pre>
+  <iframe id="preview" src="https://ozclef.github.io/home/" style="width:50%; height:500px;"></iframe>
+</div>
+5. ¿Puedo mostrar archivos privados?
+Para archivos privados necesitas autenticarte con un token de GitHub y usar la API mediante JavaScript desde Codespaces o una app propia. No es posible hacerlo directo y público en GitHub Pages por seguridad.
+6. ¿En Codespaces puedo hacer esto?
+¡Sí! En Codespaces tienes control total y puedes levantar un servidor local, obtener archivos con la API (usando tu token), y mostrar tanto el código fuente como la vista previa (por ejemplo, usando live-server para servir HTML y luego previsualizarlo).
+
+Resumen para tu dashboard "profesional":
+Lista de archivos/repos → seleccionas uno.
+Muestras el código fuente (fetch al raw de GitHub).
+Si hay GitHub Pages, muestras la vista previa en el iframe.
+Si no, solo muestra el código fuente (y podrías agregar un botón para “copiar” o “descargar”).
+¿Quieres un ejemplo de código completo para esto (HTML + JS + highlight)? ¿O ayuda para hacerlo dinámico desde Codespaces con autenticación para privados?
+¡Solo dime cómo lo quieres y te lo armo!
+
+
+
+  
 </body>
 </html>

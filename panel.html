@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventario de Repositorios</title>
+</head>
+<body>
+-->
+  -->
+  <div>
+<div class="container">
+  <div class="sidebar">
+    <h2>Mis Repositorios</h2>
+    <ul id="repoList">
+      
+      <!-- Aquí se insertan los enlaces vía JS -->
+      <a href="#" onclick="document.getElementById('viewer').src=''">Ver página</a>
+    </ul>
+  </div>
+  <div class="main">
+    <iframe id="viewer" src="" title="Vista previa"></iframe>
+  </div>
+</div>
+
+</div>
+</div>
+<script>
+  // Lista de tus proyectos/repositorios. Puedes ampliar o automatizar esto.
+  const repos = [
+    {
+      name: "ozclef/home",
+      github: "https://github.com/ozclef/home",
+      page: "https://ozclef.github.io/home/"
+    },
+    {
+      name: "os-clef/home",
+      github: "https://github.com/os-clef/home",
+      page: "https://ozclef.github.io/home/"
+    },
+    {
+      name: "BI-US/Os-",
+      github: "https://github.com/BI-US/Os-",
+      page: ""
+    },
+    {
+      name: "Wuana-Wuary/web",
+      github: "https://github.com/Wuana-Wuary/web",
+      page: "https://wuana-wuary.github.io/web/"
+    },
+    {
+      name: "capitan-spalding/amazing-people",
+      github: "https://github.com/capitan-spalding/amazing-people",
+      page: ""
+    },
+    {
+      name: "ozclef/before-home",
+      github: "https://github.com/ozclef/before-home",
+      page: ""
+    },
+    {
+      name: "os-clef/amazing-people",
+      github: "https://github.com/os-clef/amazing-people",
+      page: ""
+    }
+  ];
+
+  const repoList = document.getElementById("repoList");
+  const viewer = document.getElementById("viewer");
+
+  repos.forEach(r => {
+    const li = document.createElement("li");
+
+    // Enlace a GitHub
+    const a1 = document.createElement("a");
+    a1.href = r.github;
+    a1.target = "_blank";
+    a1.textContent = r.name;
+
+    // Enlace a página (si existe)
+    const a2 = document.createElement("a");
+    if (r.page) {
+      a2.href = "#";
+      a2.style.marginLeft = "10px";
+      a2.textContent = "🌐 página";
+      a2.onclick = function(e) {
+        e.preventDefault();
+        viewer.src = r.page;
+        window.scrollTo(0,0);
+      };
+    }
+
+    li.appendChild(a1);
+    if (r.page) li.appendChild(a2);
+    repoList.appendChild(li);
+  });
+
+  // Opcional: cargar el primero por defecto
+  if (repos[0].page) viewer.src = repos[0].page;
+
+//avatar icon img
+    document.getElementById('avatar').src = `https://github.com/${username}.png`;
+        
+</script>
+<!--</body>
+</html>
+  -->
+
+  
+  </main>
+  <aside class="right">
+		<iframe src="https://ozclef.github.io/feed/music"></iframe>
+ 	  </aside>
+</div>
+
+<script>
+  // Lógica para mostrar/ocultar sidebars en móvil
+  function toggleSidebar(side) {
+    const aside = document.querySelector(`aside.${side}`);
+    aside.classList.toggle('active');
+  }
+
+  // Centrar contenido aunque haya zoom
+  window.addEventListener('resize', centerLayout);
+  window.addEventListener('load', centerLayout);
+  function centerLayout() {
+    document.body.style.display = 'flex';
+    document.body.style.justifyContent = 'center';
+  }
+</script>

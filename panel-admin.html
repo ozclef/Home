@@ -1,10 +1,119 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Panel de Repositorios - @ozclef</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Highlight.js para resaltar código -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>admin - 0z</title>
+<style>
+  /* ====== RESET Y BASE ====== */
+  * { box-sizing: border-box; margin: 5px; padding: 05px; }
+  html, body { height: 100%; font-family: sans-serif; background: #f3f4f6; }
+
+  /* ====== LAYOUT DESKTOP ====== */
+  /*
+  .layout {
+    display: grid;
+    grid-template-columns: 25% 0.9fr 25%;
+    height: 90vh;
+  }
+  aside, main {
+    overflow-y: auto;
+    padding: 10px;
+  }
+  aside { background: skyblue; }
+  main { background: white; }
+  { box-sizing: border-box; margin: 0; padding: 0; }
+*/
+  html, body { height: 100%; font-family: sans-serif; background: linear-gradient(#f3f4f6 30%, black 50%); }
+
+  /* ====== LAYOUT DESKTOP ====== */
+  .layout {
+  	
+    border: solid black;
+   border-radius: 4px;
+    display: grid;
+    grid-template-columns: 25% 1.5fr 25%;
+    height: 100%;
+  }
+  aside, main {
+    overflow-y: auto;
+    padding: 10px;
+  }
+  aside { background: gray; 
+    border: solid black;
+   border-radius: 4px;}
+  main { background: white; min-width:90% }
+
+  
+  /* ====== NAVBAR SUPERIOR ====== */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 8vh;
+    /*background: linear-gradient(90deg, skyblue, #F0F);*/
+    background: linear-gradient(90deg, skyblue, blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 1000;
+    border: solid black;
+  }
+  .navbar h1 { font-size: 1.2rem; }
+  .navbar button , .navbar a {
+    /*background: rgba(255,255,255,0.2);*/
+    border: solid black;
+   border-radius: 4px;
+    padding: 5px 10px;
+    color: black;
+    cursor: pointer;
+   
+  }
+
+  /* ====== MOBILE ====== */
+  @media (max-width: 968px) {
+    .layout {
+      grid-template-columns: 1.7fr;
+      grid-template-rows: auto 2.1fr auto;
+      width: 80vh;
+    border: solid black;
+   border-radius: 4px;
+    }
+    aside {
+    	
+    border: solid black;
+   border-radius: 4px;
+      display: none; /* ocultar sidebars por defecto */
+    }
+    aside.active {
+      display: block;
+      position: fixed;
+      top: 8vh;
+      botton: 0;
+      width: 90%;
+      z-index: 999;
+    }
+    aside.left { left: 0; }
+    aside.right { right: 0; }
+  }
+
+  /* ====== IFRAMES ====== */
+  iframe {
+    width: 100%;
+    height: calc(100vh - 70px);
+    border: none;
+    background: white;
+    
+    border: solid black;
+   border-radius: 4px;
+  }
+  
+</style>
+
+
+ <!-- Highlight.js para resaltar código -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <style>
@@ -76,7 +185,7 @@
     .repo-list::-webkit-scrollbar { width: 7px; background: #25304b; }
     .repo-list::-webkit-scrollbar-thumb { background: #4c77b7; border-radius: 7px; }
   </style>
-<!--- 1er version----
+<!--- 1er version---->
     <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
     .container { display: flex; height: 100vh; }
@@ -104,9 +213,51 @@
   </style>
 
   
+	
 </head>
 <body>
-  <!--
+
+<!-- NAVBAR SUPERIOR -->
+<div class="navbar">
+  <button onclick="toggleSidebar('left')">☰</button>
+<h3> Holi- </h3>
+  <a href="index.html">INICIO-</a>
+  <button onclick="toggleSidebar('right')">☰</button>
+</div>
+
+
+<!-- LAYOUT PRINCIPAL -->
+<div class="layout" style="padding-top:60px;">
+  <aside class="left">
+	  <br>
+    <h3> --Más aun...--</h3>
+	  <br>
+    <a href="index.html">INICIO-Pag. Principal</a>    <br>
+<a href="https://ozclef.github.io/dashboard/music.html">musica YT Spotify</a><br>
+<a href="https://ozclef.github.io/dashboard/"> Dashboard Os porfafolio</a><br>
+<a href="https://ozclef.github.io/dashboard/"> Media Visual </a><br>
+<a href="https://ozclef.github.io/feed/pictures"> Galeria Pictures</a><br>
+   <br>
+	  <div style="border-radius: 3px; boder: solid black; box-shadow; 2px 3px cyan;" >
+	<a href="https://ozclef.github.io/dashboard/card.html" > this card...</a>
+    <iframe src="https://ozclef.github.io/dashboard/card.html"></iframe>
+	<br> <a href="https://ozclef.github.io/dashboard/">Dashboard Main</a>
+   <!-- <iframe src="https://ozclef.github.io/dashboard/"></iframe>-->
+	  </div>
+  </aside>
+  <main>
+<!--	
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Repositorios - @ozclef</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+</head>
+<body>
+ -->
+	  <div>
 <div class="container">
   <div class="sidebar">
     <img id="avatar" class="avatar" src="" alt="avatar">
@@ -128,7 +279,9 @@
       <iframe id="viewer" class="iframe-box" src="" title="Vista previa"></iframe>
     </div>
   </div>
-</div>--
+</div>
+		  
+		  --
 <script>
   // --- CONFIGURA TUS DATOS AQUÍ ---
   const username = "ozclef";
@@ -303,115 +456,8 @@
     renderList(this.value.toLowerCase());
   });
 </script>
-  <!--
+
 </body>
 </html>
--->
 
-
-
-
-<!--
-
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Inventario de Repositorios</title>
-
-</head>
-<body>
-  -->
-<div class="container">
-  <div class="sidebar">
-    <h2>Mis Repositorios</h2>
-    <ul id="repoList">
-      
-      <!-- Aquí se insertan los enlaces vía JS -->
-      <a href="#" onclick="document.getElementById('viewer').src=''">Ver página</a>
-    </ul>
-  </div>
-  <div class="main">
-    <iframe id="viewer" src="" title="Vista previa"></iframe>
-  </div>
-</div>
-<script>
-  // Lista de tus proyectos/repositorios. Puedes ampliar o automatizar esto.
-  const repos = [
-    {
-      name: "ozclef/home",
-      github: "https://github.com/ozclef/home",
-      page: "https://ozclef.github.io/home/"
-    },
-    {
-      name: "os-clef/home",
-      github: "https://github.com/os-clef/home",
-      page: "https://ozclef.github.io/home/"
-    },
-    {
-      name: "BI-US/Os-",
-      github: "https://github.com/BI-US/Os-",
-      page: ""
-    },
-    {
-      name: "Wuana-Wuary/web",
-      github: "https://github.com/Wuana-Wuary/web",
-      page: "https://wuana-wuary.github.io/web/"
-    },
-    {
-      name: "capitan-spalding/amazing-people",
-      github: "https://github.com/capitan-spalding/amazing-people",
-      page: ""
-    },
-    {
-      name: "ozclef/before-home",
-      github: "https://github.com/ozclef/before-home",
-      page: ""
-    },
-    {
-      name: "os-clef/amazing-people",
-      github: "https://github.com/os-clef/amazing-people",
-      page: ""
-    }
-  ];
-
-  const repoList = document.getElementById("repoList");
-  const viewer = document.getElementById("viewer");
-
-  repos.forEach(r => {
-    const li = document.createElement("li");
-
-    // Enlace a GitHub
-    const a1 = document.createElement("a");
-    a1.href = r.github;
-    a1.target = "_blank";
-    a1.textContent = r.name;
-
-    // Enlace a página (si existe)
-    const a2 = document.createElement("a");
-    if (r.page) {
-      a2.href = "#";
-      a2.style.marginLeft = "10px";
-      a2.textContent = "🌐 página";
-      a2.onclick = function(e) {
-        e.preventDefault();
-        viewer.src = r.page;
-        window.scrollTo(0,0);
-      };
-    }
-
-    li.appendChild(a1);
-    if (r.page) li.appendChild(a2);
-    repoList.appendChild(li);
-  });
-
-  // Opcional: cargar el primero por defecto
-  if (repos[0].page) viewer.src = repos[0].page;
-
-//avatar icon img
-    document.getElementById('avatar').src = `https://github.com/${username}.png`;
-        
-</script>
-</body>
-</html>
+<!----
